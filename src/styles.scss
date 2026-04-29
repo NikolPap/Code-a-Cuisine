@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@use '../public/assets/styles/index';
+
+/* src/styles.css */
+:root {
+  --bg-dark-green: #396039; 
+  --text-light-beige: #F5F5DC;
+  --text-white: #ffffff;
+}
+
+body, html {
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--bg-dark-green);
+  color: var(--text-light-beige);
+  max-width: 1440px;
+  margin: auto;
+}
+
+
+button {
+  cursor: pointer;
+  border: none;
+}
