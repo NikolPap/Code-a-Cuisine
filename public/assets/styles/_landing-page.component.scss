@@ -1,0 +1,138 @@
+.landing-wrapper {
+  display: flex;
+  height: calc(100vh - 40px);
+  overflow: hidden;
+  padding: 40px 40px 0 40px;
+}
+
+.content-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80vh;
+}
+
+.logo {
+  width: 150px;
+}
+
+.subtitle {
+  font-size: 3rem;
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+
+.title {
+  font-size: 6.5rem;
+  font-weight: bold;
+  margin: 0 0 40px 0;
+  white-space: nowrap;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.btn-primary {
+  background-color: var(--text-light-beige);
+  color: var(--bg-dark-green);
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.8;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.1rem;
+}
+
+.question {
+  color: var(--text-white);
+  font-weight: 500;
+  font-size: 2rem;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.cookbook-link {
+  color: var(--text-light-beige);
+  width: 236px;
+  height: 52px;
+  text-decoration: none;
+  font-weight: normal;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.arrow-icon {
+  width: 20px;
+  height: auto;
+  display: block;
+}
+
+.cookbook-link:hover .arrow-icon {
+  animation: arrowFly 0.6s ease-in-out forwards;
+}
+
+.cookbook-link:hover {
+  background-color: rgba(165, 185, 165, 0.1);
+}
+
+@keyframes arrowFly {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  40% {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+  41% {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.images-side {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.plate {
+  position: absolute;
+  max-width: 450px;
+  max-height: 500px;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.plate-top {
+  top: -5%;
+  z-index: 1;
+}
+
+.plate-middle {
+  top: 21%;
+  z-index: 2;
+}
+
+.plate-bottom {
+  top: 48%;
+  z-index: 3;
+}
