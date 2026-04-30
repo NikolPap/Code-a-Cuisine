@@ -80,6 +80,7 @@
   </div>
 
   <div class="actions-container-center">
-    <button class="btn-generate">Generate a recipe</button>
+    <button class="btn-generate" (click)="generateRecipe()">Generate a recipe</button>
+    <app-loading-screen *ngIf="isLoading"></app-loading-screen>
   </div>
 </div>
