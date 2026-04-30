@@ -1,0 +1,85 @@
+<div class="page-wrapper">
+  <header class="top-header">
+    <div class="header-left">
+      <a routerLink="/" class="logo-link">
+        <img src="/assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
+      </a>
+      <a routerLink="/generate" class="back-link">
+        <img src="/assets/images/arrow-left.svg" alt="back" /> Ingredients
+      </a>
+    </div>
+  </header>
+
+  <div class="text-center">
+    <h1 class="page-title">Choose your preferences</h1>
+  </div>
+
+  <div class="counters-section">
+    <div class="counter-block">
+      <p>How many portions you need?</p>
+      <div class="counter-controls">
+        <button class="icon-btn" (click)="changePortions(-1)"><img src="/assets/images/minus-box.svg" alt="-" /></button>
+        <span class="counter-value">{{ portions }}</span>
+        <span class="counter-label">Portions</span>
+        <button class="icon-btn" (click)="changePortions(1)"><img src="/assets/images/plus-box.svg" alt="+" /></button>
+      </div>
+    </div>
+
+    <div class="counter-block">
+      <p>How many are cooking?</p>
+      <div class="counter-controls">
+        <button class="icon-btn" (click)="changePersons(-1)"><img src="/assets/images/minus-box.svg" alt="-" /></button>
+        <span class="counter-value">{{ persons }}</span>
+        <span class="counter-label">{{ persons === 1 ? 'Person' : 'Persons' }}</span>
+        <button class="icon-btn" (click)="changePersons(1)"><img src="/assets/images/plus-box.svg" alt="+" /></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card preferences-card">
+    <div class="pref-group">
+      <h3><img src="/assets/images/clock.svg" alt="time" class="section-icon"/> Cooking time:</h3>
+      <div class="pills-container">
+        <div class="pill-wrapper" (click)="selectTime('Quick')">
+          <div class="pill" [class.active]="selectedTime === 'Quick'">Quick</div>
+          <span class="subtext">ab to 20min</span>
+        </div>
+        <div class="pill-wrapper" (click)="selectTime('Medium')">
+          <div class="pill" [class.active]="selectedTime === 'Medium'">Medium</div>
+          <span class="subtext">25-40min</span>
+        </div>
+        <div class="pill-wrapper" (click)="selectTime('Complex')">
+          <div class="pill" [class.active]="selectedTime === 'Complex'">Complex</div>
+          <span class="subtext">over 45min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pref-group">
+      <h3><img src="/assets/images/public.svg" alt="cuisine" class="section-icon"/> Cuisine</h3>
+      <div class="pills-container">
+        <div class="pill" [class.active]="selectedCuisine === 'German'" (click)="selectCuisine('German')">German</div>
+        <div class="pill" [class.active]="selectedCuisine === 'Italian'" (click)="selectCuisine('Italian')">Italian</div>
+        <div class="pill" [class.active]="selectedCuisine === 'Indian'" (click)="selectCuisine('Indian')">Indian</div>
+        <div class="pill" [class.active]="selectedCuisine === 'Japanese'" (click)="selectCuisine('Japanese')">Japanese</div>
+        <div class="pill" [class.active]="selectedCuisine === 'Gourmet'" (click)="selectCuisine('Gourmet')">Gourmet</div>
+        <div class="pill" [class.active]="selectedCuisine === 'Fusion'" (click)="selectCuisine('Fusion')">Fusion</div>
+      </div>
+    </div>
+
+    <div class="pref-group">
+      <h3><img src="/assets/images/fork-spoon.svg" alt="diet" class="section-icon"/> Diet preferences</h3>
+      <div class="pills-container">
+        <div class="pill" [class.active]="selectedDiet === 'Vegetarian'" (click)="selectDiet('Vegetarian')">Vegetarian</div>
+        <div class="pill" [class.active]="selectedDiet === 'Vegan'" (click)="selectDiet('Vegan')">Vegan</div>
+        <div class="pill" [class.active]="selectedDiet === 'Keto'" (click)="selectDiet('Keto')">Keto</div>
+        <div class="pill" [class.active]="selectedDiet === 'No preferences'" (click)="selectDiet('No preferences')">No preferences</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="actions-container-center">
+    <button class="btn-generate">Generate a recipe</button>
+  </div>
+</div>
