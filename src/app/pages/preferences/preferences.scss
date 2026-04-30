@@ -1,0 +1,176 @@
+.page-wrapper {
+  padding: 30px 50px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* --- Header --- */
+.header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.logo-small {
+  width: 120px;
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--bg-dark-green);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* --- Titles --- */
+.text-center {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  color: var(--bg-dark-green);
+  font-weight: 600;
+}
+
+/* --- Counters --- */
+.counters-section {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  margin-bottom: 40px;
+}
+
+.counter-block p {
+  font-size: 1.25rem;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.counter-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+
+  &:hover {
+    background-color: rgba(57, 96, 57, 0.3);
+  }
+}
+
+.counter-value {
+  background-color: #dbe4db;
+  padding: 4px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.counter-label {
+  font-size: 1.25rem;
+  margin-right: 10px;
+}
+
+/* --- Preferences Card --- */
+.preferences-card {
+  background-color: var(--bg-light-green);
+  border-radius: 15px;
+  padding: 40px;
+  margin-bottom: 40px;
+}
+
+.pref-group {
+  margin-bottom: 30px;
+}
+
+.pref-group:last-child {
+  margin-bottom: 0;
+}
+
+.pref-group h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.section-icon {
+  width: 24px;
+}
+
+/* --- Pills--- */
+.pills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.pill-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.pill {
+    background-color: rgba(250, 240, 230, 1);
+    color: var(--text-dark);
+    padding-right: 10px;
+    padding-left: 10px;
+    height: 20px;
+    text-align: center;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.pill:hover {
+  background-color: rgba(250, 224, 198, 1);
+}
+
+.pill.active {
+  background-color: rgba(57, 96, 57, 0.3);
+}
+
+.subtext {
+  font-size: 0.8rem;
+}
+
+.actions-container-center {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-generate {
+  background-color: var(--bg-dark-green);
+  color: var(--text-white);
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+.btn-generate:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
