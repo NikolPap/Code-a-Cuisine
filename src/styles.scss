@@ -5,17 +5,19 @@
   --bg-dark-green: #396039; 
   --text-light-beige: #F5F5DC;
   --text-white: #ffffff;
+ --bg-light-green: rgba(57, 96, 57, 0.3); 
+  --text-dark: rgba(30, 85, 21, 1); 
+  --input-beige: rgba(250, 240, 230, 0.8); 
 }
 
 body, html {
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: var(--bg-dark-green);
-  color: var(--text-light-beige);
-  max-width: 1440px;
-  margin: auto;
+  font-family: 'Quicksand', sans-serif;
+  background-color: var(--text-white); /* ΤΟ ΑΛΛΑΞΑΜΕ ΣΕ ΛΕΥΚΟ */
+  color: var(--text-dark); /* ΤΟ ΑΛΛΑΞΑΜΕ ΣΕ ΣΚΟΥΡΟ */
 }
-
 
 button {
   cursor: pointer;
