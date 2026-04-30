@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { LoadingScreen } from '../../components/loading-screen/loading-screen';
+
 
 
 @Component({
   selector: 'app-preferences',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, LoadingScreen],
   templateUrl: './preferences.html',
   styleUrl: './preferences.scss',
 })
@@ -14,6 +16,9 @@ export class Preferences {
    // --- Counters ---
   portions: number = 2; 
   persons: number = 1;
+isLoading: boolean = false;
+
+constructor(private router: Router) {}
 
   changePortions(amount: number) {
     const newValue = this.portions + amount;
@@ -44,5 +49,12 @@ export class Preferences {
 
   selectDiet(diet: string) {
     this.selectedDiet = diet;
+  }
+  generateRecipe() {
+    this.isLoading = true; 
+    setTimeout(() => {
+      this.isLoading = false;
+      this.router.navigate(['/results']); 
+    }, 10000); 
   }
 }
