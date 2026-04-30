@@ -1,0 +1,105 @@
+<div class="page-wrapper">
+  <header class="top-header">
+    <a routerLink="/" style="display: inline-block;">
+      <img src="/assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
+    </a>
+  </header>
+
+  <div class="text-center">
+    <h1 class="page-title">Generate recipe</h1>
+    <p class="page-subtitle">
+      Got random stuff in your kitchen? Pop it in—we've got the perfect recipe waiting.
+    </p>
+  </div>
+
+  <div class="cards-container">
+    <div class="card form-card">
+      <div class="form-row labels">
+        <span>Ingredient</span>
+        <span>Serving size</span>
+      </div>
+
+      <div class="form-row inputs">
+        <input type="text" class="input-ingredient" [(ngModel)]="currentName" />
+
+        <div class="size-inputs">
+          <input type="number" class="input-amount" placeholder="100" [(ngModel)]="currentAmount" />
+          <div class="custom-dropdown" (click)="toggleMainDropdown()">
+            <div class="selected-value">
+              {{ mainSelectedUnit }}
+              <img src="assets/images/arrow_drop_down.svg" class="dropdown-icon" [class.rotated]="isMainDropdownOpen" />
+            </div>
+
+            <div class="dropdown-options" *ngIf="isMainDropdownOpen">
+              <div class="option-item" *ngFor="let unit of units" (click)="selectMainUnit(unit, $event)">
+                {{ unit }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-add" (click)="addIngredient()">
+          <img src="/assets/images/add_2.svg" alt="add icon" />
+        </button>
+      </div>
+    </div>
+    <div class="card list-card">
+      <h3>List of your Ingredients</h3>
+      
+      <div class="ingredients-list">
+        <div class="list-item" *ngFor="let item of ingredientsList; let i = index">
+          <ng-container *ngIf="!item.isEditing">
+            <span class="item-text">
+              • {{ item.amount }}{{ item.unit === 'piece' ? '' : item.unit }} {{ item.name }}
+            </span>
+            <div class="item-actions">
+              <button class="icon-btn" (click)="toggleEdit(item)">
+                <img src="/assets/images/edit.svg" alt="edit icon" />
+              </button>
+              <button class="icon-btn" (click)="deleteIngredient(i)">
+                <img src="/assets/images/delete.svg" alt="delete icon" />
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="item.isEditing">
+            <div class="edit-mode-container">
+              <span class="bullet">•</span>
+              
+              <input type="number" class="input-amount edit-input" [(ngModel)]="item.amount" />
+              <div class="custom-dropdown edit-dropdown" (click)="toggleItemDropdown(item)">
+                <div class="selected-value">
+                  {{ item.unit }}
+                  <img src="assets/images/arrow_drop_down.svg" class="dropdown-icon" [class.rotated]="item.isDropdownOpen" />
+                </div>
+                <div class="dropdown-options" *ngIf="item.isDropdownOpen">
+                  <div class="option-item" *ngFor="let unit of units" (click)="selectItemUnit(item, unit, $event)">
+                    {{ unit }}
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Όνομα Υλικού (απλό κείμενο, σύμφωνα με το design) -->
+              <span class="item-name">{{ item.name }}</span>
+            </div>
+
+            <div class="item-actions">
+              <!-- Κουμπί Αποθήκευσης (Checkmark) -->
+              <button class="icon-btn" (click)="toggleEdit(item)">
+                <!-- Υποθέτω ότι έχεις ένα check.svg ή done.svg -->
+                <img src="/assets/images/check.svg" alt="save icon" /> 
+              </button>
+              <!-- Κουμπί Διαγραφής -->
+              <button class="icon-btn" (click)="deleteIngredient(i)">
+                <img src="/assets/images/delete.svg" alt="delete icon" />
+              </button>
+            </div>
+          </ng-container>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions-container" *ngIf="ingredientsList.length > 0">
+    <button class="btn-next" routerLink="/preferences">Next step</button>
+  </div>
+</div>

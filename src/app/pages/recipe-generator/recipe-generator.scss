@@ -1,0 +1,256 @@
+.page-wrapper {
+  padding: 30px 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.top-header {
+  margin-bottom: 40px;
+}
+
+.logo-small {
+  width: 120px;
+  cursor: pointer;
+}
+
+.text-center {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.page-title {
+  font-size: 3.375rem;
+  color: var(--bg-dark-green);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.page-subtitle {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+}
+
+.cards-container {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background-color: var(--bg-light-green);
+  border-radius: 15px;
+  padding: 30px;
+  flex: 1; 
+ 
+}
+
+.form-card {
+   min-height: 176px;
+   height: 100%;
+}
+
+.list-card {
+  min-height: 209px;
+  height: 100%;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.labels span {
+  font-size: 1.25rem;
+  width: 100%;
+}
+
+.inputs {
+  gap: 15px;
+}
+
+input {
+  background-color: var(--input-beige);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: var(--text-dark);
+  outline: none;
+}
+
+.size-inputs {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+}
+
+.input-amount {
+  width: 60px;
+  text-align: center;
+}
+
+.custom-dropdown {
+  position: relative;
+  background-color: var(--input-beige);
+  border-radius: 20px;
+  width: 100px; 
+  cursor: pointer;
+  user-select: none;
+}
+
+.selected-value {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.dropdown-icon {
+  width: 16px;
+  transition: transform 0.3s ease; 
+}
+
+.dropdown-icon.rotated {
+  transform: rotate(180deg);
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 10; 
+}
+
+.option-item {
+  padding: 2px 32px;
+  color: var(--text-dark);
+  font-size: 1rem;
+  transition: background-color 0.2s;
+  border-radius: 25px;
+  margin-top: 2px;
+}
+
+
+.option-item:hover {
+  background-color: #e6dfd5;
+}
+
+.btn-add {
+  background: transparent;
+  font-size: 2rem;
+  color: var(--text-dark);
+  padding: 0 10px;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background-color: var(--input-beige);
+  }
+}
+
+.list-card h3 {
+  margin-top: 0;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-next {
+  background-color: var(--bg-dark-green);
+  color: var(--text-white);
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition:
+    opacity 0.3s,
+    transform 0.2s;
+}
+
+.btn-next:hover {
+  opacity: 0.9;
+  transform: scale(1.02); 
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-light-green); 
+  border-radius: 10px;
+  margin-top: 5px;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 20;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  padding: 5px; 
+}
+
+.autocomplete-item {
+  padding: 8px 15px;
+  color: var(--text-dark);
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.autocomplete-item:hover {
+  background-color: var(--input-beige); 
+}
+
+.edit-mode-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bullet {
+  font-weight: bold;
+}
+
+.edit-input {
+  width: 60px;
+  padding: 5px 10px;
+  height: 35px;
+}
+
+.edit-dropdown {
+  width: 90px;
+}
+
+.edit-dropdown .selected-value {
+  padding: 5px 10px;
+  height: 35px;
+}
+
+.item-name {
+  font-weight: 500;
+  margin-left: 5px;
+}
