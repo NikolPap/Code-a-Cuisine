@@ -8,16 +8,18 @@
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  padding: 30px 50px;
+  padding: 40px 50px;
   box-sizing: border-box;
 }
 
 .top-header {
   width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .logo-small {
-  width: 120px;
+  width: 150px;
 }
 
 .loading-content {
