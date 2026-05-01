@@ -1,6 +1,6 @@
 .page-wrapper {
-  padding: 30px 50px;
-  max-width: 1200px;
+  padding: 40px 50px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .logo-small {
-  width: 120px;
+  width: 150px;
   cursor: pointer;
 }
 
@@ -34,24 +34,26 @@
   display: flex;
   gap: 30px;
   margin-bottom: 30px;
+  justify-content: center;
 }
 
 .card {
   background-color: var(--bg-light-green);
   border-radius: 15px;
   padding: 30px;
-  flex: 1; 
- 
+  flex: 1;
 }
 
 .form-card {
-   min-height: 176px;
-   height: 100%;
+  min-height: 176px;
+  height: 100%;
+  max-width: 580px;
 }
 
 .list-card {
   min-height: 209px;
   height: 100%;
+  max-width: 480px;
 }
 
 .form-row {
@@ -95,7 +97,7 @@ input {
   position: relative;
   background-color: var(--input-beige);
   border-radius: 20px;
-  width: 100px; 
+  width: 100px;
   cursor: pointer;
   user-select: none;
 }
@@ -111,7 +113,7 @@ input {
 
 .dropdown-icon {
   width: 16px;
-  transition: transform 0.3s ease; 
+  transition: transform 0.3s ease;
 }
 
 .dropdown-icon.rotated {
@@ -120,11 +122,11 @@ input {
 
 .dropdown-options {
   position: absolute;
-  top: 100%; 
+  top: 100%;
   left: 0;
   width: 100%;
   overflow: hidden;
-  z-index: 10; 
+  z-index: 10;
 }
 
 .option-item {
@@ -135,7 +137,6 @@ input {
   border-radius: 25px;
   margin-top: 2px;
 }
-
 
 .option-item:hover {
   background-color: #e6dfd5;
@@ -148,6 +149,7 @@ input {
   padding: 0 10px;
   cursor: pointer;
   border: none;
+  border-radius: 5px;
 
   &:hover {
     background-color: var(--input-beige);
@@ -179,6 +181,12 @@ input {
   justify-content: flex-end;
 }
 
+.cards-plus-btn {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .btn-next {
   background-color: var(--bg-dark-green);
   color: var(--text-white);
@@ -194,22 +202,22 @@ input {
 
 .btn-next:hover {
   opacity: 0.9;
-  transform: scale(1.02); 
+  transform: scale(1.02);
 }
 
 .autocomplete-dropdown {
   position: absolute;
-  top: 100%; 
+  top: 100%;
   left: 0;
   width: 100%;
-  background-color: var(--bg-light-green); 
+  background-color: var(--bg-light-green);
   border-radius: 10px;
   margin-top: 5px;
   max-height: 150px;
   overflow-y: auto;
   z-index: 20;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-  padding: 5px; 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  padding: 5px;
 }
 
 .autocomplete-item {
@@ -222,7 +230,7 @@ input {
 }
 
 .autocomplete-item:hover {
-  background-color: var(--input-beige); 
+  background-color: var(--input-beige);
 }
 
 .edit-mode-container {
