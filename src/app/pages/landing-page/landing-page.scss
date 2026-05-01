@@ -1,10 +1,19 @@
+.landing-bg {
+  background-color: var(--bg-dark-green);
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden; 
+}
+
 .landing-wrapper {
-  background-color: var(--bg-dark-green); /* <-- ΠΡΟΣΘΕΣΕ ΑΥΤΗ ΤΗ ΓΡΑΜΜΗ */
   display: flex;
   height: calc(100vh - 40px);
-  overflow: hidden; 
-  padding: 40px 40px 0 40px;
-  color: var(--text-light-beige); 
+  padding-top: 40px;
+  padding-right: 50px;
+  padding-left: 50px;
+  color: var(--text-light-beige);
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .content-side {
@@ -87,7 +96,7 @@
 }
 
 .cookbook-link:hover {
-  background-color: rgba(165, 185, 165, 0.1);
+  background-color: rgba(232, 240, 232, 0.1);
 }
 
 @keyframes arrowFly {
