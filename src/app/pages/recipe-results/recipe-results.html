@@ -1,0 +1,54 @@
+<div class="results-bg">
+    <div class="results-wrapper">
+    <header class="top-header">
+        <a routerLink="/">
+        <img src="/assets/images/logo-white.svg" alt="Code à Cuisine" class="logo-small" />
+        </a>
+    </header>
+
+    <div class="hero-section">
+        <div class="hero-text">
+        <h1 class="page-title">The recipe results</h1>
+        <p class="page-subtitle">
+            We took what you have and let our AI do the thinking.<br>
+            Here are 3 easy recipes you can make right now!
+        </p>
+        
+        <div class="tags-container">
+            <span class="tag" *ngFor="let tag of tags">{{ tag }}</span>
+        </div>
+        </div>
+
+        <div class="hero-image">
+        <img src="/assets/images/robot-cooking.svg" alt="AI Cooking" />
+        </div>
+    </div>
+
+    <div class="cards-container">
+        <div class="recipe-card" *ngFor="let recipe of recipes">
+        <div class="card-header">
+            <img src="/assets/images/cloche.svg" alt="recipe" class="card-icon" />
+            <span>Recipe {{ recipe.id }}</span>
+        </div>
+        
+        <h3 class="recipe-title">{{ recipe.title }}</h3>
+        
+        <div class="recipe-time">
+            <img src="/assets/images/clock.svg" alt="time" class="time-icon" />
+            <span>Cooking time: {{ recipe.time }}</span>
+        </div>
+        
+        <button class="btn-view" [routerLink]="['/recipe', recipe.id]">View</button>
+        </div>
+
+    </div>
+
+    <div class="footer-action">
+        <a routerLink="/preferences" class="new-recipe-link">
+        Generate new recipe 
+        <img class="arrow-icon" src="/assets/images/arrow-right-white.svg" alt="right arrow icon">
+        </a>
+    </div>
+
+    </div>
+</div>
