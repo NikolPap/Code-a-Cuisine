@@ -9,6 +9,7 @@ interface Recipe {
 }
 
 interface Cuisine {
+  id: string; 
   name: string;
   emoji: string;
   image: string;
@@ -32,14 +33,15 @@ export class Cookbook {
     { title: 'Spicy Arrabbiata with Burrata', time: '25min', likes: 88 }
   ];
 
-  cuisines: Cuisine[] = [
-    { name: 'Italian cuisine', emoji: '🤌', image: 'assets/images/italian.svg' },
-    { name: 'German cuisine', emoji: '🥨', image: 'assets/images/german.svg' },
-    { name: 'Japanese cuisine', emoji: '🥢', image: 'assets/images/japanese.svg' },
-    { name: 'Gourmet cuisine', emoji: '✨', image: 'assets/images/gourmet.svg' },
-    { name: 'Indian cuisine', emoji: '🍛', image: 'assets/images/indian.svg' },
-    { name: 'Fusion cuisine', emoji: '🍢', image: 'assets/images/fusion.svg' }
+ cuisines: Cuisine[] = [
+    { id: 'italian', name: 'Italian cuisine', emoji: '🤌', image: 'assets/images/italian.svg' },
+    { id: 'german', name: 'German cuisine', emoji: '🥨', image: 'assets/images/german.svg' },
+    { id: 'japanese', name: 'Japanese cuisine', emoji: '🥢', image: 'assets/images/japanese.svg' },
+    { id: 'gourmet', name: 'Gourmet cuisine', emoji: '✨', image: 'assets/images/gourmet.svg' },
+    { id: 'indian', name: 'Indian cuisine', emoji: '🍛', image: 'assets/images/indian.svg' },
+    { id: 'fusion', name: 'Fusion cuisine', emoji: '🍢', image: 'assets/images/fusion.svg' }
   ];
+
 
    @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
   isDown = false;
