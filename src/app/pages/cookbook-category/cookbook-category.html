@@ -13,7 +13,6 @@
     <button class="btn-dark-green" routerLink="/generate">Generate a recipe</button>
   </header>
 
-  <!-- ΕΔΩ ΦΟΡΤΩΝΕΙ ΤΟ ΔΥΝΑΜΙΚΟ BANNER -->
   <div class="banner-container">
     <img [src]="'/assets/images/' + categoryBanner" alt="Category Banner" class="category-banner" />
   </div>
@@ -41,15 +40,27 @@
 
     </div>
   </div>
+  <div class="pagination" *ngIf="totalPages > 0">
+    <span class="page-arrow" 
+          (click)="goToPage(currentPage - 1)"
+          [style.opacity]="currentPage === 1 ? '0.3' : '1'"
+          [style.pointer-events]="currentPage === 1 ? 'none' : 'auto'"
+          [style.cursor]="currentPage === 1 ? 'default' : 'pointer'">
+      &lt;
+    </span>
+    <span class="page-num" 
+          *ngFor="let p of pageNumbers" 
+          [class.active]="currentPage === p" 
+          (click)="goToPage(p)">
+      {{ p }}
+    </span>
+    <span class="page-arrow" 
+          (click)="goToPage(currentPage + 1)"
+          [style.opacity]="currentPage === totalPages ? '0.3' : '1'"
+          [style.pointer-events]="currentPage === totalPages ? 'none' : 'auto'"
+          [style.cursor]="currentPage === totalPages ? 'default' : 'pointer'">
+      &gt;
+    </span>
 
-  <div class="pagination">
-    <span class="page-arrow">&lt;</span>
-    <span class="page-num active">1</span>
-    <span class="page-num">2</span>
-    <span class="page-num">3</span>
-    <span class="page-dots">...</span>
-    <span class="page-num">8</span>
-    <span class="page-arrow">&gt;</span>
   </div>
-
 </div>
