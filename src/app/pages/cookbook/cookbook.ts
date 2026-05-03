@@ -1,27 +1,23 @@
-import { Component, ElementRef, ViewChild  } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Recipe, Cuisine } from '../../shared/interfaces';
+import { RecipeService } from '../../services/recipe';
+import { Cuisine } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-cookbook',
-  imports: [RouterLink, CommonModule,],
+  standalone: true, 
+  imports: [RouterLink, CommonModule],
   templateUrl: './cookbook.html',
   styleUrl: './cookbook.scss',
 })
-export class Cookbook {
-   mostLikedRecipes: Recipe[] = [
-    { title: 'Quinoa Salad with Roasted Chickpeas', time: '20min', likes: 84 },
-    { title: 'Shakshuka with Feta and Sourdough', time: '25min', likes: 112 },
-    { title: 'Zucchini Noodles with Avocado Pesto', time: '15min', likes: 49 },
-    { title: 'Honey Garlic Glazed Salmon', time: '20min', likes: 93 }, 
-    { title: 'Creamy Mushroom Risotto', time: '35min', likes: 78 },
-    { title: 'Eggplant Parmigiana Bake', time: '45min', likes: 55 },
-    { title: 'Homemade Gnocchi with Sage Butter', time: '40min', likes: 61 },
-    { title: 'Spicy Arrabbiata with Burrata', time: '25min', likes: 88 }
-  ];
+export class Cookbook implements OnInit {
+  
+  private recipeService = inject(RecipeService);
+  private cdr = inject(ChangeDetectorRef); // Το "ξυπνητήρι" του Angular
+  mostLikedRecipes: any[] = [];
 
- cuisines: Cuisine[] = [
+  cuisines: Cuisine[] = [
     { id: 'italian', name: 'Italian cuisine', emoji: '🤌', image: 'assets/images/italian.svg' },
     { id: 'german', name: 'German cuisine', emoji: '🥨', image: 'assets/images/german.svg' },
     { id: 'japanese', name: 'Japanese cuisine', emoji: '🥢', image: 'assets/images/japanese.svg' },
@@ -30,11 +26,18 @@ export class Cookbook {
     { id: 'fusion', name: 'Fusion cuisine', emoji: '🍢', image: 'assets/images/fusion.svg' }
   ];
 
-
-   @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
+  @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
   isDown = false;
   startX: number = 0;
   scrollLeft: number = 0;
+
+  ngOnInit() {
+    this.recipeService.getAllRecipes().subscribe(recipes => {
+      const sortedRecipes = recipes.sort((a, b) => b.likes - a.likes);
+      this.mostLikedRecipes = sortedRecipes.slice(0, 10)
+      this.cdr.detectChanges();
+    });
+  }
 
   onMouseDown(e: MouseEvent) {
     this.isDown = true;
