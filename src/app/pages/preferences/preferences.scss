@@ -161,19 +161,3 @@
   display: flex;
   justify-content: center;
 }
-
-.btn-generate {
-  background-color: var(--bg-dark-green);
-  color: var(--text-white);
-  padding: 15px 40px;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  cursor: pointer;
-  border: none;
-  transition: opacity 0.3s, transform 0.2s;
-}
-
-.btn-generate:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
-}
