@@ -44,7 +44,7 @@
 
   <div class="cuisine-grid">
     
-    <div class="cuisine-item" *ngFor="let cuisine of cuisines">
+    <div class="cuisine-item" *ngFor="let cuisine of cuisines" [routerLink]="['/cookbook', cuisine.id]">
       <h3 class="cuisine-title">{{ cuisine.name }} <span class="emoji">{{ cuisine.emoji }}</span></h3>
       <div class="cuisine-img-wrapper">
           <img [src]="cuisine.image" [alt]="cuisine.name" class="cuisine-img" />
