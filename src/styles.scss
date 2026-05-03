@@ -24,6 +24,22 @@ button {
   border: none;
 }
 
+.btn-dark-green {
+  background-color: rgba(57, 96, 57, 1);
+  color: rgba(250, 240, 230, 1);
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.btn-dark-green:hover {
+  background-color: rgba(5, 94, 5, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+
 
 .new-recipe-link {
   display: inline-flex; 
