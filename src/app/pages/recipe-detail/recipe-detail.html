@@ -1,0 +1,98 @@
+<div class="page-wrapper">
+  <header class="top-header">
+    <a routerLink="/" class="logo-link">
+      <img src="/assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
+    </a>
+    <a routerLink="/results" class="back-link">
+      <img src="/assets/images/arrow-left.svg" alt="back" /> Recipe results
+    </a>
+  </header>
+  <div class="recipe-paper">
+    <div class="recipe-header">
+      <div class="header-left">
+        <div class="time-info">
+          <img src="/assets/images/clock.svg" alt="clock" /> Cooking time: {{ recipe.time }}
+        </div>
+        <h1 class="recipe-title">{{ recipe.title }}</h1>
+        <div class="cooking-info">
+          <span>Cooking person: {{ recipe.chefsCount }}</span>
+          <img *ngFor="let i of [].constructor(recipe.chefsCount); let idx = index" 
+               [src]="'/assets/images/chef' + (idx + 1) + '.svg'" 
+               class="chef-badge" alt="Chef" />
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="tags-row">
+          <span class="tag" *ngFor="let tag of recipe.tags">{{ tag }}</span>
+          <span class="tag like-tag"><img src="/assets/images/favorite-small.svg" alt="likes"/> {{ recipe.likes }}</span>
+        </div>
+        <div class="nutrition-table">
+          <p class="nutri-title">Nutritional information</p>
+          <div class="nutri-grid">
+            <div class="nutri-col"><strong>Energie</strong><span>{{ recipe.nutrition.energy }}</span></div>
+            <div class="nutri-col"><strong>Protein</strong><span>{{ recipe.nutrition.protein }}</span></div>
+            <div class="nutri-col"><strong>Fat</strong><span>{{ recipe.nutrition.fat }}</span></div>
+            <div class="nutri-col"><strong>Carbs</strong><span>{{ recipe.nutrition.carbs }}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <img src="/assets/images/ingredients.svg" alt="Ingredients" class="section-banner" />
+    
+    <div class="ingredients-split">
+      <div class="ing-col">
+        <h3 class="ing-title green-text">Your ingredients</h3>
+        <ul>
+          <li *ngFor="let item of recipe.myIngredients">
+            <span class="dot">•</span> <span class="amount">{{ item.amount }}</span> {{ item.name }}
+          </li>
+        </ul>
+      </div>
+      <div class="ing-col">
+        <h3 class="ing-title green-text">Extra ingredients</h3>
+        <ul>
+          <li *ngFor="let item of recipe.extraIngredients">
+            <span class="dot">•</span> <span class="amount">{{ item.amount }}</span> {{ item.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <img src="/assets/images/directions.svg" alt="Directions" class="section-banner" />
+
+    <div class="directions-grid">
+      <div class="step-card" *ngFor="let step of recipe.steps">
+        <div class="step-header">
+          <div class="step-title-wrap">
+            <span class="step-number">{{ step.num }}.</span>
+            <span class="step-title">{{ step.title }}</span>
+          </div>
+          <img [src]="'/assets/images/chef' + step.chefId + '.svg'" alt="Chef" class="step-chef" />
+        </div>
+        <p class="step-text">{{ step.text }}</p>
+      </div>
+    </div>
+
+    <div class="finish-box">
+      <span class="bold-text">Just finished this meal?</span> Give it a heart, so that the others know this is delicious.
+      <img [src]="isLiked ? '/assets/images/favorite-filled.svg' : '/assets/images/favorite.svg'" 
+           class="action-heart" (click)="toggleLike()" alt="Like" />
+    </div>
+
+  </div>
+
+  <div class="cookbook-banner">
+    <span>Find inspiration for your next culinary adventure!</span>
+    <button class="btn-dark-green" routerLink="/cookbook">Cookbook</button>
+  </div>
+
+  <div class="footer-action">
+     <a routerLink="/generate" class="new-recipe-link">
+        Generate new recipe 
+        <img class="arrow-icon" src="/assets/images/arrow-righ-greent.svg" alt="right arrow icon">
+        </a>
+  </div>
+
+</div>
