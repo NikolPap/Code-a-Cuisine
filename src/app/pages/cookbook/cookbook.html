@@ -26,7 +26,7 @@
         (mouseleave)="onMouseLeave()"
         (mouseup)="onMouseUp()"
         (mousemove)="onMouseMove($event)">
-        <div class="mini-recipe-card" *ngFor="let recipe of mostLikedRecipes">
+          <div class="mini-recipe-card" *ngFor="let recipe of mostLikedRecipes" [routerLink]="['/recipe', recipe.id]" style="cursor: pointer;">
           <div class="mini-header">
             <span class="mini-time">
               <img src="/assets/images/clock.svg" alt="time" /> Cooking time: {{ recipe.time }}
@@ -58,5 +58,4 @@
         <img class="arrow-icon" src="/assets/images/arrow-righ-greent.svg" alt="right arrow icon">
         </a>
   </div>
-
 </div>
