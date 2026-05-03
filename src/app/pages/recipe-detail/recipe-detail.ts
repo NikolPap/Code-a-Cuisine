@@ -18,7 +18,6 @@ export class RecipeDetail {
     tags: ['Vegetarian', 'Quick'],
     nutrition: { energy: '630 kcal', protein: '18g', fat: '24g', carbs: '58g' },
     
-    // Υλικά
     myIngredients: [
       { amount: '80g', name: 'Pasta noodles' },
       { amount: '100g', name: 'Baby spinach' },

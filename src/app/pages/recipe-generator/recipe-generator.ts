@@ -2,14 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Ingredient {
-  name: string;
-  amount: number;
-  unit: string;
-  isEditing?: boolean;
-  isDropdownOpen?: boolean; 
-}
+import { Ingredient } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-recipe-generator',

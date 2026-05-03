@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-interface RecipeSummary {
-  id: number;
-  title: string;
-  time: string;
-}
+import { RecipeSummary } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-recipe-results',

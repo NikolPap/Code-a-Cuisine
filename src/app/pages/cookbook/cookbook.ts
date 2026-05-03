@@ -1,19 +1,7 @@
 import { Component, ElementRef, ViewChild  } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-interface Recipe {
-  title: string;
-  time: string;
-  likes: number;
-}
-
-interface Cuisine {
-  id: string; 
-  name: string;
-  emoji: string;
-  image: string;
-}
+import { Recipe, Cuisine } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-cookbook',

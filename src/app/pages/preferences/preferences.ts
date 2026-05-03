@@ -13,9 +13,8 @@ import { LoadingScreen } from '../../components/loading-screen/loading-screen';
 })
 
 export class Preferences {
-   // --- Counters ---
-  portions: number = 2; 
-  persons: number = 1;
+portions: number = 2; 
+persons: number = 1;
 isLoading: boolean = false;
 
 constructor(private router: Router) {}

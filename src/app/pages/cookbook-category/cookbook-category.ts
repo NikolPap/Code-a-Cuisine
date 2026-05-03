@@ -1,15 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-
-interface RecipeListItem {
-  id: number;
-  title: string;
-  time: string;
-  tags: string[];
-  likes: number;
-}
+import { RecipeListItem } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-cookbook-category',
