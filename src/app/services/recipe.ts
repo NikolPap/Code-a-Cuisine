@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, docData, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, docData, updateDoc, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -30,5 +30,16 @@ export class RecipeService {
    async updateLikes(recipeId: string, newLikesCount: number) {
     const recipeDocRef = doc(this.firestore, `recipes/${recipeId}`);
     await updateDoc(recipeDocRef, { likes: newLikesCount });
+  }
+
+   async saveIngredientsList(ingredientsArray: string[]) {
+    const docRef = doc(this.firestore, 'metadata/ingredients');
+    await setDoc(docRef, { list: ingredientsArray });
+    console.log("Η λίστα υλικών ανέβηκε!");
+  }
+
+  getIngredientsList(): Observable<any> {
+    const docRef = doc(this.firestore, 'metadata/ingredients');
+    return docData(docRef);
   }
 }
