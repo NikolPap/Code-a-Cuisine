@@ -20,7 +20,36 @@
       </div>
 
       <div class="form-row inputs">
-        <input type="text" class="input-ingredient" [(ngModel)]="currentName" />
+      <div class="autocomplete-wrapper">
+          <input 
+            type="text" 
+            class="input-ingredient hint-input" 
+            [value]="hintText" 
+            disabled 
+          />
+
+          <input 
+            type="text" 
+            class="input-ingredient real-input" 
+            [(ngModel)]="currentName" 
+            (input)="filterIngredients()" 
+            (keydown)="onKeyDown($event)" 
+            placeholder="e.g. Pasta" 
+            autocomplete="off"
+          />
+
+          <div class="autocomplete-list" *ngIf="isAutocompleteOpen">
+            <div 
+              class="autocomplete-item" 
+              *ngFor="let suggestion of filteredIngredients; let i = index" 
+              [class.highlighted]="i === highlightedIndex"
+              (mouseenter)="highlightedIndex = i" 
+              (click)="selectSuggestion(suggestion)">
+              {{ suggestion }}
+            </div>
+          </div>
+
+        </div>
 
         <div class="size-inputs">
           <input type="number" class="input-amount" placeholder="100" [(ngModel)]="currentAmount" />
@@ -47,9 +76,9 @@
       
       <div class="ingredients-list">
         <div class="list-item" *ngFor="let item of ingredientsList; let i = index">
-          <ng-container *ngIf="!item.isEditing">
+              <ng-container *ngIf="!item.isEditing">
             <span class="item-text">
-              • {{ item.amount }}{{ item.unit === 'piece' ? '' : item.unit }} {{ item.name }}
+              • {{ item.amount }}{{ item.unit === 'gram' ? 'g' : (item.unit === 'piece' ? '' : item.unit) }} {{ item.name }}
             </span>
             <div class="item-actions">
               <button class="icon-btn" (click)="toggleEdit(item)">
@@ -76,18 +105,13 @@
                   </div>
                 </div>
               </div>
-              
-              <!-- Όνομα Υλικού (απλό κείμενο, σύμφωνα με το design) -->
               <span class="item-name">{{ item.name }}</span>
             </div>
 
             <div class="item-actions">
-              <!-- Κουμπί Αποθήκευσης (Checkmark) -->
               <button class="icon-btn" (click)="toggleEdit(item)">
-                <!-- Υποθέτω ότι έχεις ένα check.svg ή done.svg -->
                 <img src="/assets/images/check.svg" alt="save icon" /> 
               </button>
-              <!-- Κουμπί Διαγραφής -->
               <button class="icon-btn" (click)="deleteIngredient(i)">
                 <img src="/assets/images/delete.svg" alt="delete icon" />
               </button>
