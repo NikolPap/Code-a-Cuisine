@@ -38,7 +38,7 @@
             <span>Cooking time: {{ recipe.time }}</span>
         </div>
         
-        <button class="btn-view" [routerLink]="['/recipe', recipe.id]">View</button>
+       <button class="btn-view" (click)="viewAndSaveRecipe(recipe)">View</button>
         </div>
 
     </div>
