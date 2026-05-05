@@ -1,9 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core'; // <-- Πρόσθεσε το OnInit
-import { RouterLink } from "@angular/router";
+import { RouterLink, Router } from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Ingredient } from '../../shared/interfaces';
 import { RecipeService } from '../../services/recipe';
+import { Generator } from '../../services/generator';
+
+
 @Component({
   selector: 'app-recipe-generator',
   standalone: true,
@@ -11,9 +14,13 @@ import { RecipeService } from '../../services/recipe';
   templateUrl: './recipe-generator.html',
   styleUrl: './recipe-generator.scss',
 })
+
 export class RecipeGenerator implements OnInit {
   
   private recipeService = inject(RecipeService);
+  private generatorService = inject(Generator); 
+  private router = inject(Router); 
+  
 
   isMainDropdownOpen = false;
   mainSelectedUnit = 'gram';
@@ -135,6 +142,15 @@ export class RecipeGenerator implements OnInit {
     item.isDropdownOpen = false;
   }
 
-  deleteIngredient(index: number) { this.ingredientsList.splice(index, 1); }
+  deleteIngredient(index: number) { this.ingredientsList.splice(index, 1);
+   }
+
+   goToNextStep() {
+    if (this.ingredientsList.length > 0) {
+      this.generatorService.setIngredients(this.ingredientsList);
+      this.router.navigate(['/preferences']);
+    }
+
+}
 
 }
