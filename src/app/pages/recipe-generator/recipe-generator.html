@@ -78,6 +78,7 @@
         <div class="list-item" *ngFor="let item of ingredientsList; let i = index">
               <ng-container *ngIf="!item.isEditing">
             <span class="item-text">
+
               • {{ item.amount }}{{ item.unit === 'gram' ? 'g' : (item.unit === 'piece' ? '' : item.unit) }} {{ item.name }}
             </span>
             <div class="item-actions">
@@ -124,7 +125,7 @@
   </div>
 
   <div class="actions-container" *ngIf="ingredientsList.length > 0">
-    <button class="btn-next" routerLink="/preferences">Next step</button>
+    <button class="btn-next" (click)="goToNextStep()">Next step</button>
   </div>
 </div>
 </div>
