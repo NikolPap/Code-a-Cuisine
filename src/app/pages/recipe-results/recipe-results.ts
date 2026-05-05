@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RecipeSummary } from '../../shared/interfaces';
+import { Generator } from '../../services/generator';
+import { RecipeService } from '../../services/recipe';
+
 
 @Component({
   selector: 'app-recipe-results',
@@ -10,11 +12,22 @@ import { RecipeSummary } from '../../shared/interfaces';
   styleUrl: './recipe-results.scss',
 })
 export class RecipeResults {
-   tags: string[] = ['Italian', 'Quick'];
+  private generatorService = inject(Generator);
+  private recipeService = inject(RecipeService);
+  private router = inject(Router);
 
-  recipes: RecipeSummary[] = [
-    { id: 1, title: 'Pasta with spinach and cherry tomatoes', time: '20min' },
-    { id: 2, title: 'Creamy garlic shrimp pasta', time: '22min' },
-    { id: 3, title: 'Pasta alla Trapanese (Sicilian Tomato Pesto)', time: '20min' }
-  ];
+  tags: string[] = ['AI Generated', 'New'];
+  recipes: any[] = [];
+
+  ngOnInit() {
+    this.recipes = this.generatorService.getGeneratedRecipes();
+    if (this.recipes.length === 0) {
+      this.router.navigate(['/generate']);
+    }
+  }
+
+  async viewAndSaveRecipe(recipe: any) {
+    const firebaseId = await this.recipeService.saveRecipe(recipe);
+    this.router.navigate(['/recipe', firebaseId]);
+  }
 }
