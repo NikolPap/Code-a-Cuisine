@@ -7,10 +7,8 @@
 
 .landing-wrapper {
   display: flex;
-  height: calc(100vh - 40px);
-  padding-top: 40px;
-  padding-right: 50px;
-  padding-left: 50px;
+  height: 100vh; 
+  padding: 0 50px; 
   color: var(--text-light-beige);
   max-width: 1440px;
   margin: 0 auto;
@@ -21,7 +19,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 80vh;
+  height: 100vh; 
+  padding-top: 40px; 
+  padding-bottom: 40px; 
+  box-sizing: border-box; 
 }
 
 .logo {
@@ -49,7 +50,10 @@
   font-size: 1.2rem;
   font-weight: bold;
   border-radius: 4px;
-  transition: opacity 0.3s ease;
+  border: none;
+  cursor: pointer;
+  width: fit-content; 
+  transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
@@ -82,7 +86,12 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: opacity 0.3s ease;
+  border-radius: 8px; 
+  transition: all 0.3s ease;
+}
+
+.cookbook-link:hover {
+  background-color: rgba(232, 240, 232, 0.1);
 }
 
 .arrow-icon {
@@ -93,10 +102,6 @@
 
 .cookbook-link:hover .arrow-icon {
   animation: arrowFly 0.6s ease-in-out forwards;
-}
-
-.cookbook-link:hover {
-  background-color: rgba(232, 240, 232, 0.1);
 }
 
 @keyframes arrowFly {
@@ -125,27 +130,13 @@
   justify-content: flex-end;
 }
 
-.plate {
+.hero-plates {
   position: absolute;
-  max-width: 450px;
-  max-height: 500px;
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
+  right: -5%;
+  top: 0; 
+  height: 100vh; 
+  max-width: none; 
+  object-fit: contain; 
   z-index: 1;
-}
-
-.plate-top {
-  top: -5%;
-  z-index: 1;
-}
-
-.plate-middle {
-  top: 21%;
-  z-index: 2;
-}
-
-.plate-bottom {
-  top: 48%;
-  z-index: 3;
+  pointer-events: none; 
 }
