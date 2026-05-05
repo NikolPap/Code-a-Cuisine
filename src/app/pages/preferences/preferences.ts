@@ -1,23 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoadingScreen } from '../../components/loading-screen/loading-screen';
-
-
+import { Generator } from '../../services/generator';
+import { firstValueFrom } from 'rxjs'; 
 
 @Component({
   selector: 'app-preferences',
+  standalone: true, 
   imports: [RouterLink, CommonModule, LoadingScreen],
   templateUrl: './preferences.html',
   styleUrl: './preferences.scss',
 })
 
 export class Preferences {
-portions: number = 2; 
-persons: number = 1;
-isLoading: boolean = false;
+  portions: number = 2; 
+  persons: number = 1;
+  isLoading: boolean = false;
+  showErrorModal: boolean = false;
+  selectedTime: string = '';
+  selectedCuisine: string = '';
+  selectedDiet: string = ''; 
 
-constructor(private router: Router) {}
+  private router = inject(Router);
+  private generatorService = inject(Generator);
 
   changePortions(amount: number) {
     const newValue = this.portions + amount;
@@ -33,12 +39,7 @@ constructor(private router: Router) {}
     }
   }
 
-  // --- Selections (Pills) ---
-  selectedTime: string = '';
-  selectedCuisine: string = '';
-  selectedDiet: string = ''; 
-
-  selectTime(time: string) {
+   selectTime(time: string) {
     this.selectedTime = time;
   }
 
@@ -49,11 +50,38 @@ constructor(private router: Router) {}
   selectDiet(diet: string) {
     this.selectedDiet = diet;
   }
-  generateRecipe() {
-    this.isLoading = true; 
-    setTimeout(() => {
-      this.isLoading = false;
-      this.router.navigate(['/results']); 
-    }, 10000); 
+
+  async generateRecipe() {
+    if (!this.selectedTime || !this.selectedCuisine || !this.selectedDiet) {
+      alert("Please select Cooking time, Cuisine, and Diet preferences!");
+      return;
+    }
+
+    this.isLoading = true;
+
+    const userPrefs = {
+      portions: this.portions,
+      persons: this.persons,
+      time: this.selectedTime,
+      cuisine: this.selectedCuisine,
+      diet: this.selectedDiet
+    };
+
+    try {
+      const [n8nResponse] = await Promise.all([
+        firstValueFrom(this.generatorService.generateRecipesFromN8n(userPrefs)),
+        new Promise(resolve => setTimeout(resolve, 9000)) 
+      ]);
+      
+      if (n8nResponse && n8nResponse.recipes) {
+        this.generatorService.setGeneratedRecipes(n8nResponse.recipes);
+        this.isLoading = false;
+        this.router.navigate(['/results']); 
+      }
+
+    } catch (err) {
+      console.error("❌ n8n:", err);
+      this.isLoading = false; 
+    }
   }
 }
