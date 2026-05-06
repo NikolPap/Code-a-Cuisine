@@ -2,6 +2,7 @@ import { Component, OnInit, inject, ChangeDetectorRef  } from '@angular/core';
 import { ActivatedRoute,RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RecipeService } from '../../services/recipe';
+import { Location } from '@angular/common'; 
 
 @Component({
   selector: 'app-recipe-detail',
@@ -16,6 +17,7 @@ export class RecipeDetail {
   private route = inject(ActivatedRoute);
   private recipeService = inject(RecipeService);
   private cdr = inject(ChangeDetectorRef); 
+  private location = inject(Location);
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -29,6 +31,10 @@ export class RecipeDetail {
         });
       }
     });
+  }
+
+   goBack() {
+    this.location.back(); 
   }
 
  toggleLike() {
