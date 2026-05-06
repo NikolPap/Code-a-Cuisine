@@ -76,3 +76,83 @@ button {
     transform: translateX(0);
   }
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000; 
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.error-modal {
+  background-color: #3b5f41; /* Το πράσινο χρώμα της εφαρμογής σου */
+  color: var(--text-white);
+  padding: 40px 50px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 550px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  font-family: 'Quicksand', sans-serif;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: transparent;
+  border: none;
+  color: var(--text-white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+}
+
+.error-modal h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.error-modal p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--text-light-beige); 
+  margin-bottom: 40px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-white);
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: opacity 0.3s;
+}
+
+.back-link:hover {
+  opacity: 0.7;
+}
+
+.back-link .arrow {
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+}
+
+.back-link:hover .arrow {
+  transform: translateX(5px);
+}
