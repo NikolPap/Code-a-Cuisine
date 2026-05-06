@@ -79,8 +79,26 @@
 
   </div>
 
-  <div class="actions-container-center">
-    <button class="btn-dark-green" (click)="generateRecipe()">Generate a recipe</button>
+<div class="actions-container-center">
+    <button 
+      class="btn-dark-green" 
+      [class.btn-disabled]="!selectedTime || !selectedCuisine || !selectedDiet"
+      [disabled]="!selectedTime || !selectedCuisine || !selectedDiet"
+      (click)="generateRecipe()">
+      Generate a recipe
+    </button>
     <app-loading-screen *ngIf="isLoading"></app-loading-screen>
+    
+ <div class="modal-overlay" *ngIf="modalConfig.show">
+    <div class="error-modal">
+      <button class="close-btn" (click)="closeModal()">&#10005;</button>
+      <h2>{{ modalConfig.title }}</h2>
+      <p>{{ modalConfig.message }}</p>
+      <button class="btn-dark-green modal-btn" [routerLink]="modalConfig.btnLink" (click)="closeModal()" style="width: 100%; display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+        {{ modalConfig.btnText }} <span class="arrow">&rarr;</span>
+      </button>
+
+    </div>
+  </div>
   </div>
 </div>
