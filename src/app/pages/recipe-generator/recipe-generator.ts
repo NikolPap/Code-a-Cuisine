@@ -114,8 +114,9 @@ export class RecipeGenerator implements OnInit {
     this.isMainDropdownOpen = false;
   }
 
-  addIngredient() {
-    if (this.currentName.trim() !== '' && this.currentAmount !== null) {
+addIngredient() {
+    if (this.currentName.trim() !== '' && this.currentAmount !== null && this.currentAmount > 0) {
+      
       this.ingredientsList.push({
         name: this.currentName,
         amount: this.currentAmount,
@@ -123,6 +124,7 @@ export class RecipeGenerator implements OnInit {
         isEditing: false,
         isDropdownOpen: false
       });
+      
       this.currentName = '';
       this.currentAmount = null;
       this.isAutocompleteOpen = false;
