@@ -15,6 +15,10 @@ export class Generator {
  setIngredients(ingredients: Ingredient[]) {
     this.userIngredients = ingredients;
   }
+
+   getIngredients(): Ingredient[] {
+    return this.userIngredients;
+  }
   
   generateRecipesFromN8n(preferences: any): Observable<any> {
 
