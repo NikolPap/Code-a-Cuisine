@@ -33,8 +33,7 @@
             class="input-ingredient real-input" 
             [(ngModel)]="currentName" 
             (input)="filterIngredients()" 
-            (keydown)="onKeyDown($event)" 
-            placeholder="e.g. Pasta" 
+            (keydown)="onKeyDown($event)"  
             autocomplete="off"
           />
 
@@ -52,7 +51,7 @@
         </div>
 
         <div class="size-inputs">
-          <input type="number" class="input-amount" placeholder="100" [(ngModel)]="currentAmount" />
+          <input type="number" class="input-amount" placeholder="100" [(ngModel)]="currentAmount" min="1"/>
           <div class="custom-dropdown" (click)="toggleMainDropdown()">
             <div class="selected-value">
               {{ mainSelectedUnit }}
@@ -94,7 +93,7 @@
             <div class="edit-mode-container">
               <span class="bullet">•</span>
               
-              <input type="number" class="input-amount edit-input" [(ngModel)]="item.amount" />
+              <input type="number" class="input-amount edit-input" [(ngModel)]="item.amount" min="1" />
               <div class="custom-dropdown edit-dropdown" (click)="toggleItemDropdown(item)">
                 <div class="selected-value">
                   {{ item.unit }}
