@@ -3,8 +3,8 @@
     <a routerLink="/" class="logo-link">
       <img src="/assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
     </a>
-    <a routerLink="/results" class="back-link">
-      <img src="/assets/images/arrow-left.svg" alt="back" /> Recipe results
+    <a (click)="goBack()" class="back-link" style="cursor: pointer;">
+      <img src="/assets/images/arrow-left.svg" alt="back" /> Back
     </a>
   </header>
   <div class="recipe-paper" *ngIf="recipe">
