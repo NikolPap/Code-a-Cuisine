@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoadingScreen } from '../../components/loading-screen/loading-screen';
@@ -22,8 +22,11 @@ export class Preferences {
   selectedCuisine: string = '';
   selectedDiet: string = ''; 
 
+
+
   private router = inject(Router);
   private generatorService = inject(Generator);
+  private cdr = inject(ChangeDetectorRef); 
 
   changePortions(amount: number) {
     const newValue = this.portions + amount;
@@ -51,37 +54,91 @@ export class Preferences {
     this.selectedDiet = diet;
   }
 
+  modalConfig = {
+    show: false,
+    title: '',
+    message: '',
+    btnText: '',
+    btnLink: ''
+  };
+
+  closeModal() {
+    this.modalConfig.show = false;
+  }
+
   async generateRecipe() {
-    if (!this.selectedTime || !this.selectedCuisine || !this.selectedDiet) {
-      alert("Please select Cooking time, Cuisine, and Diet preferences!");
-      return;
-    }
+    if (!this.validatePreferences()) return;
+    if (!this.validateIngredientsWeight()) return;
 
     this.isLoading = true;
+    
+    try {
+      await this.fetchFromAI();
+    } catch (error) {
+      this.handleAIError(error);
+    }
+  }
 
+  private validatePreferences(): boolean {
+    if (!this.selectedTime || !this.selectedCuisine || !this.selectedDiet) {
+      return false;
+    }
+    return true;
+  }
+
+  private validateIngredientsWeight(): boolean {
+    const ingredients = this.generatorService.getIngredients();
+    if (ingredients.length < 2) {
+      this.showIngredientError(); return false; 
+    }
+    
+    let totalWeight = 0;
+    ingredients.forEach(i => totalWeight += (i.unit === 'piece' ? i.amount * 100 : i.amount));
+
+    if ((totalWeight / this.portions) < 150) {
+      this.showIngredientError(); return false; 
+    }
+    return true;
+  }
+
+  private async fetchFromAI() {
     const userPrefs = {
-      portions: this.portions,
-      persons: this.persons,
-      time: this.selectedTime,
-      cuisine: this.selectedCuisine,
-      diet: this.selectedDiet
+      portions: this.portions, persons: this.persons,
+      time: this.selectedTime, cuisine: this.selectedCuisine, diet: this.selectedDiet
     };
 
-    try {
-      const [n8nResponse] = await Promise.all([
-        firstValueFrom(this.generatorService.generateRecipesFromN8n(userPrefs)),
-        new Promise(resolve => setTimeout(resolve, 9000)) 
-      ]);
-      
-      if (n8nResponse && n8nResponse.recipes) {
-        this.generatorService.setGeneratedRecipes(n8nResponse.recipes);
-        this.isLoading = false;
-        this.router.navigate(['/results']); 
-      }
+    const [response] = await Promise.all([
+      firstValueFrom(this.generatorService.generateRecipesFromN8n(userPrefs)),
+      new Promise(res => setTimeout(res, 9000))
+    ]);
+    
+    this.generatorService.setGeneratedRecipes(response.recipes);
+    this.isLoading = false; 
+    this.router.navigate(['/results']); 
+  }
 
-    } catch (err) {
-      console.error("❌ n8n:", err);
-      this.isLoading = false; 
-    }
+  private handleAIError(err: any) {
+    this.isLoading = false; 
+    const isQuotaError = err.status === 429;
+    
+    this.modalConfig = {
+      show: true,
+      title: isQuotaError ? 'Daily Limit Reached 🛑' : 'Oops! Server is sleeping 💤',
+      message: isQuotaError ? 'Maximum AI recipes reached.' : 'AI chefs are busy or server is down.',
+      btnText: 'Explore Cookbook',
+      btnLink: '/cookbook'
+    };
+
+    this.cdr.detectChanges();
+  }
+
+  private showIngredientError() {
+    this.modalConfig = {
+      show: true,
+      title: 'Ups! Not quite enough...',
+      message: 'Ingredient quantities aren\'t sufficient. Please adjust and try again.',
+      btnText: 'Go back to ingredients',
+      btnLink: '/generate'
+    };
   }
 }
