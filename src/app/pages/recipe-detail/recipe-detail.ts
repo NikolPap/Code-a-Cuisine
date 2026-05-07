@@ -11,8 +11,10 @@ import { Location } from '@angular/common';
   styleUrl: './recipe-detail.scss',
 })
 export class RecipeDetail {
-      recipe: any = null;
+  recipe: any = null;
   isLiked = false;
+  isIngredientsHidden = false;
+  isDirectionsHidden = false;
 
   private route = inject(ActivatedRoute);
   private recipeService = inject(RecipeService);
