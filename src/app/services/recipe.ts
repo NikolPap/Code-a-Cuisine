@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Firestore, collection, addDoc, collectionData, doc, docData, updateDoc, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { FullRecipe } from '../shared/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,10 @@ export class RecipeService {
   }
 
   
-  getRecipeById(id: string): Observable<any> {
-    const recipeDoc = doc(this.firestore, `recipes/${id}`);
-    return docData(recipeDoc, { idField: 'id' });
-  }
+  getRecipeById(id: string): Observable<FullRecipe> {
+  const recipeDoc = doc(this.firestore, `recipes/${id}`);
+  return docData(recipeDoc, { idField: 'id' }) as Observable<FullRecipe>;
+}
 
    async updateLikes(recipeId: string, newLikesCount: number) {
     const recipeDocRef = doc(this.firestore, `recipes/${recipeId}`);
