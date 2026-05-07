@@ -10,6 +10,16 @@ export class Generator {
   private http = inject(HttpClient);
   private n8nWebhookUrl = 'http://localhost:5678/webhook/generate-recipe';
   private userIngredients: Ingredient[] = [];
+  private userPrefs: any = null; 
+
+  setUserPrefs(prefs: any) {
+    this.userPrefs = prefs;
+  }
+
+
+  getUserPrefs() {
+    return this.userPrefs;
+  }
 
 
  setIngredients(ingredients: Ingredient[]) {
