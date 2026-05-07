@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild, inject, OnInit, ChangeDetectorRef } f
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RecipeService } from '../../services/recipe';
-import { Cuisine } from '../../shared/interfaces';
+import { Cuisine, RecipeListItem } from '../../shared/interfaces'; 
 
 @Component({
   selector: 'app-cookbook',
@@ -14,8 +14,8 @@ import { Cuisine } from '../../shared/interfaces';
 export class Cookbook implements OnInit {
   
   private recipeService = inject(RecipeService);
-  private cdr = inject(ChangeDetectorRef); // Το "ξυπνητήρι" του Angular
-  mostLikedRecipes: any[] = [];
+  private cdr = inject(ChangeDetectorRef);
+  mostLikedRecipes: RecipeListItem[] = [];
 
   cuisines: Cuisine[] = [
     { id: 'italian', name: 'Italian cuisine', emoji: '🤌', image: 'assets/images/italian.svg' },
@@ -32,9 +32,10 @@ export class Cookbook implements OnInit {
   scrollLeft: number = 0;
 
   ngOnInit() {
-    this.recipeService.getAllRecipes().subscribe(recipes => {
+    this.recipeService.getAllRecipes().subscribe((recipes: RecipeListItem[]) => {
       const sortedRecipes = recipes.sort((a, b) => b.likes - a.likes);
-      this.mostLikedRecipes = sortedRecipes.slice(0, 10)
+      this.mostLikedRecipes = sortedRecipes.slice(0, 10);
+      
       this.cdr.detectChanges();
     });
   }
@@ -45,18 +46,12 @@ export class Cookbook implements OnInit {
     this.scrollLeft = this.scrollContainer.nativeElement.scrollLeft;
   }
 
-  onMouseUp() {
-    this.isDown = false;
-  }
-
-  onMouseLeave() {
-    this.isDown = false;
-  }
+  onMouseUp() { this.isDown = false; }
+  onMouseLeave() { this.isDown = false; }
 
   onMouseMove(e: MouseEvent) {
     if (!this.isDown) return; 
     e.preventDefault(); 
-    
     const x = e.pageX - this.scrollContainer.nativeElement.offsetLeft;
     const walk = (x - this.startX) * 2; 
     this.scrollContainer.nativeElement.scrollLeft = this.scrollLeft - walk;
