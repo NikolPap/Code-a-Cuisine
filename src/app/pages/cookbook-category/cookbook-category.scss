@@ -1,10 +1,3 @@
-.page-wrapper {
-  padding: 40px 20px;
-  max-width: 1440px;
-  margin: 0 auto;
-  color: var(--text-dark);
-}
-
 .top-header {
   display: flex;
   justify-content: space-between;
@@ -16,9 +9,7 @@
   flex-direction: column;
   gap: 15px;
 }
-.logo-small {
-  width: 150px;
-}
+
 .back-link {
   display: inline-flex;
   align-items: center;
@@ -30,7 +21,7 @@
 
 .banner-container {
   display: block;
-  max-width: 1150px; 
+  max-width: 1150px;
   width: 100%;
   margin: 60px auto;
   text-align: center;
@@ -42,7 +33,6 @@
   display: block;
   object-fit: contain;
 }
-
 
 .recipe-list {
   max-width: 1000px;
@@ -62,7 +52,6 @@
 }
 .list-row:hover {
   background-color: rgba(250, 240, 230, 0.7);
-  
 }
 
 .row-left {
@@ -139,16 +128,16 @@
 .page-num,
 .page-arrow {
   cursor: pointer;
-     width: 25px;
-    height: 27px;
-    transition: color 0.2s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 25px;
+  height: 27px;
+  transition: color 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .page-num:hover,
 .page-arrow:hover {
-    background-color: rgba(196, 208, 196, 0.4);
+  background-color: rgba(196, 208, 196, 0.4);
 }
 .page-num.active {
   color: var(--bg-dark-green);
@@ -164,22 +153,14 @@
 }
 
 @media (max-width: 900px) {
-  .logo-small {
-    width: 95px;
-  }
-
-  .page-wrapper {
-    padding: 20px;
-  }
-
   .top-header {
     margin-bottom: 30px;
     .btn-dark-green {
-      display: none; 
+      display: none;
     }
   }
 
- .banner-container {
+  .banner-container {
     max-width: 100%;
     width: 100%;
     margin: 30px auto;
@@ -189,31 +170,30 @@
     width: 102% !important;
     height: auto !important;
   }
-  
 
   .recipe-list {
     gap: 20px;
   }
 
-  .list-row{
-    flex-direction: column; 
+  .list-row {
+    flex-direction: column;
     align-items: flex-start;
     background-color: rgba(250, 240, 230, 0.7);
     padding: 20px;
     gap: 15px;
 
-     &:nth-child(odd) {
+    &:nth-child(odd) {
       background-color: #ffffff;
+    }
   }
-}
 
   .row-left {
     width: 100%;
-    align-items: center; 
+    align-items: center;
   }
 
   .number-circle {
-    margin-top: 0; 
+    margin-top: 0;
     width: 30px;
     height: 30px;
     font-size: 1rem;
@@ -231,8 +211,8 @@
 
   .row-right {
     width: 100%;
-    justify-content: flex-start; 
-    flex-wrap: wrap; 
+    justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 10px;
   }
 
@@ -246,7 +226,6 @@
     padding-bottom: 30px;
   }
 
-
   .mobile-action-container {
     display: flex;
     justify-content: center;
@@ -254,9 +233,8 @@
   }
 
   .mobile-btn {
-    display: block !important; 
+    display: block !important;
     width: 100%;
     max-width: 300px;
   }
 }
-
