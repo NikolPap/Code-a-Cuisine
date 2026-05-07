@@ -28,6 +28,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: -40px; 
 }
 
 .gif-container {
@@ -49,7 +50,6 @@
   object-fit: contain; 
 }
 
-
 .loading-text {
   color: var(--text-white);
   font-family: 'Ubuntu', sans-serif;
@@ -58,7 +58,6 @@
   margin: 0;
 }
 
-
 .dots {
   display: inline-block;
   animation: blink 1.5s infinite steps(4, end);
@@ -66,14 +65,30 @@
 }
 
 @keyframes blink {
-  0%,
-  20% {
-    color: transparent;
+  0%, 20% { color: transparent; }
+  40% { color: var(--text-white); }
+  100% { color: var(--text-white); }
+}
+
+@media (max-width: 900px) {
+  .loading-overlay {
+    padding: 20px;
   }
-  40% {
-    color: var(--text-white);
+
+  .logo-small {
+    width: 95px; 
   }
-  100% {
-    color: var(--text-white);
+
+  .loading-content {
+    margin-top: -20px;
+  }
+
+  .gif-container {
+    width: 220px; 
+    height: 270px;
+  }
+
+  .loading-text {
+    font-size: 2rem; 
   }
 }
