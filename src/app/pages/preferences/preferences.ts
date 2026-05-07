@@ -101,7 +101,7 @@ export class Preferences {
     return true;
   }
 
-  private async fetchFromAI() {
+ private async fetchFromAI() {
     const userPrefs = {
       portions: this.portions, persons: this.persons,
       time: this.selectedTime, cuisine: this.selectedCuisine, diet: this.selectedDiet
@@ -111,20 +111,26 @@ export class Preferences {
       firstValueFrom(this.generatorService.generateRecipesFromN8n(userPrefs)),
       new Promise(res => setTimeout(res, 9000))
     ]);
-    
-    this.generatorService.setGeneratedRecipes(response.recipes);
-    this.isLoading = false; 
-    this.router.navigate(['/results']); 
+    if (response && response.recipes && response.recipes.length > 0) {
+      this.generatorService.setUserPrefs(userPrefs);
+      this.generatorService.setGeneratedRecipes(response.recipes);
+      this.isLoading = false; 
+      this.router.navigate(['/results']); 
+    } else {
+      throw { status: 429 };
+    }
   }
 
-  private handleAIError(err: any) {
+ private handleAIError(err: any) {
     this.isLoading = false; 
-    const isQuotaError = err.status === 429;
+    const isQuotaError = err.status === 429 || (err.error && err.error.message && err.error.message.includes('Limit'));
     
     this.modalConfig = {
       show: true,
-      title: isQuotaError ? 'Daily Limit Reached 🛑' : 'Oops! Server is sleeping 💤',
-      message: isQuotaError ? 'Maximum AI recipes reached.' : 'AI chefs are busy or server is down.',
+      title: isQuotaError ? 'Daily Limit Reached' : 'Oops! Server is sleeping',
+      message: isQuotaError 
+        ? 'You have reached the maximum number of AI recipes for today. Please explore our Cookbook!' 
+        : 'Our AI chefs are currently busy. Please try again later or see our existing recipes.',
       btnText: 'Explore Cookbook',
       btnLink: '/cookbook'
     };
