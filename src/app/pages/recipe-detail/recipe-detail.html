@@ -39,7 +39,10 @@
       </div>
     </div>
 
-    <img src="/assets/images/ingredients.svg" alt="Ingredients" class="section-banner" />
+  <picture class="banner-wrapper">
+  <source media="(max-width: 900px)" srcset="/assets/images/ingredients-mobile.svg">
+  <img src="/assets/images/ingredients.svg" alt="Ingredients" class="section-banner" />
+</picture>
     
     <div class="ingredients-split">
       <div class="ing-col">
@@ -60,7 +63,10 @@
       </div>
     </div>
 
-    <img src="/assets/images/directions.svg" alt="Directions" class="section-banner" />
+    <picture class="banner-wrapper">
+  <source media="(max-width: 900px)" srcset="/assets/images/directions-mobile.svg">
+  <img src="/assets/images/directions.svg" alt="Directions" class="section-banner" />
+</picture>
 
     <div class="directions-grid">
       <div class="step-card" *ngFor="let step of recipe.steps">
