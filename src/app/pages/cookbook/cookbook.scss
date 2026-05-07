@@ -1,19 +1,8 @@
-.page-wrapper {
-  padding: 40px 20px;
-  max-width: 1440px;
-  margin: 0 auto;
-  color: var(--text-dark);
-}
-
 .top-header {
   display: flex;
   flex-direction: column;
   gap: 15px;
   margin-bottom: 30px;
-}
-
-.logo-small {
-  width: 150px;
 }
 
 .back-link {
@@ -250,14 +239,6 @@
 }
 
 @media (max-width:900px) {
-  .logo-small {
-    width: 95px;
-  }
-
-  .page-wrapper {
-    padding: 20px;
-  }
-
   .page-title {
     font-size: 2.5rem;
   }
