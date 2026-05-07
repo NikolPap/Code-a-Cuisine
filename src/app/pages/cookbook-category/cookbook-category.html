@@ -14,8 +14,18 @@
   </header>
 
   <div class="banner-container">
-    <img [src]="'/assets/images/' + categoryBanner" alt="Category Banner" class="category-banner" />
-  </div>
+  <picture>
+    <source 
+      media="(max-width: 900px)" 
+      [srcset]="'/assets/images/' + currentCategory + '-mobile.svg'">
+    
+  
+    <img 
+      [src]="'/assets/images/' + categoryBanner" 
+      alt="Category Banner" 
+      class="category-banner" />
+  </picture>
+</div>
 
   <div class="recipe-list">
     <div class="list-row" *ngFor="let item of recipes; let i = index">
@@ -66,5 +76,5 @@
   <div class="mobile-action-container">
     <button class="btn-dark-green" routerLink="/generate">Generate recipe</button>
   </div>
-  
+
 </div>
