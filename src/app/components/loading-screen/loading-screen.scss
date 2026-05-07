@@ -18,10 +18,6 @@
   margin: 0 auto;
 }
 
-.logo-small {
-  width: 150px;
-}
-
 .loading-content {
   flex: 1;
   display: flex;
@@ -73,10 +69,6 @@
 @media (max-width: 900px) {
   .loading-overlay {
     padding: 20px;
-  }
-
-  .logo-small {
-    width: 95px; 
   }
 
   .loading-content {
