@@ -1,16 +1,5 @@
-.page-wrapper {
-  padding: 40px 20px;
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
 .top-header {
   margin-bottom: 40px;
-}
-
-.logo-small {
-  width: 150px;
-  cursor: pointer;
 }
 
 .text-center {
@@ -96,11 +85,13 @@ input {
 
 .custom-dropdown {
   position: relative;
-  background-color: var(--input-beige);
-  border-radius: 20px;
   width: 100px;
   cursor: pointer;
-  user-select: none;
+  .dropdown-icon { width: 16px; transition: transform 0.3s; &.rotated { transform: rotate(180deg); } }
+  .dropdown-options {
+    position: absolute; top: 100%; left: 0; width: 100%; z-index: 10;
+    .option-item { padding: 5px 15px; transition: 0.2s; &:hover { background-color: #e6dfd5; } }
+  }
 }
 
 .selected-value {
@@ -110,6 +101,8 @@ input {
   padding: 10px 15px;
   font-size: 1rem;
   color: var(--text-dark);
+  background-color: var(--input-beige);
+  border-radius: 48px;
 }
 
 .dropdown-icon {
@@ -315,97 +308,100 @@ input {
 }
 
 @media (max-width: 1120px) {
-  .page-wrapper {
-    padding: 20px; 
-  }
-
-  .logo-small {
-    width: 95px;
-  }
-
-  .text-center {
-    text-align: left; 
-    margin-bottom: 30px;
-  }
-
-  .page-title { font-size: 2.5rem; }
-  .page-subtitle { font-size: 1.2rem; }
-
-  .cards-container {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 20px;
-  }
-
-  .form-card, .list-card {
-    max-width: 100%;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
+  .text-center { text-align: left; }
+  .cards-container { flex-direction: column; }
+  .form-card, .list-card { max-width: 100%; }
   .form-card {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 10px;
-    padding: 25px 20px;
+    display: grid; grid-template-columns: 1fr auto; gap: 10px;
+    .form-row { display: contents; }
   }
 
-  .form-row.labels,
-  .form-row.inputs {
-    display: contents; 
-  }
-
-  .labels span:nth-child(1) {
-    grid-column: 1 / -1; 
-    order: 1; 
-    width: auto;
-    margin-bottom: -5px;
-  }
+  .labels span:nth-child(1) { grid-column: 1 / -1; order: 1; }
 
   .autocomplete-wrapper {
-    grid-column: 1 / -1;
-    order: 2; 
+    grid-column: 1 / -1; order: 2;
+    flex-direction: column; height: auto; 
     margin-bottom: 15px;
-  }
-  
-  .labels span:nth-child(2) {
-    grid-column: 1 / -1; 
-    order: 3; 
-    width: auto;
-    margin-bottom: -5px;
+
+    .autocomplete-list {
+      position: relative; 
+      top: 0; left: 15px; margin-top: 10px; margin-bottom: 10px;
+    }
   }
 
+  .labels span:nth-child(2) { grid-column: 1 / -1; order: 3; margin-top: 10px; }
 
-  .size-inputs {
-    grid-column: 1; 
-    order: 4;
-    display: flex;
-    gap: 10px;
+  .size-inputs { 
+    grid-column: 1; order: 4; align-items: flex-start; 
+    
+    .custom-dropdown {
+      height: auto;
+      .dropdown-options {
+        position: relative; 
+        top: 5px; background: none; padding-left: 10px;
+      }
+    }
   }
 
+  .btn-add { grid-column: 2; order: 5; align-self: flex-start; margin-top: 5px; }
+  .actions-container { justify-content: center; }
 
-  .btn-add {
-    grid-column: 2;
-    order: 5;
-    display: flex;
-    align-items: center;
-    padding: 0;
+    .list-item {
+    align-items: flex-start !important;
+    padding-top: 10px;
   }
 
-  .actions-container {
-    justify-content: center;
-    margin-top: 20px;
+  .edit-mode-container {
+    display: grid !important;
+    grid-template-columns: auto auto auto;
+    gap: 6px;
+    align-items: flex-start !important; 
+    flex: 1;
+
+    .item-name {
+      grid-row: 1;
+      grid-column: 1 / 4;
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .bullet {
+      grid-row: 2;
+      grid-column: 1;
+      margin-top: 10px; 
+    }
+
+    .edit-input {
+      grid-row: 2;
+      grid-column: 2;
+      width: 80px !important;
+      margin-top: 0; 
+    }
+
+    .edit-dropdown {
+      grid-row: 2;
+      grid-column: 3;
+      width: 100px !important;
+      
+      .dropdown-options {
+        position: relative;
+        top: 5px;
+        background: none;
+        box-shadow: none;
+        width: 100%; 
+      }
+    }
+
+  .list-item {
+    align-items: flex-start !important;
   }
+  }
+
+  .item-actions {
+    margin-top: 5px;
+  }
+  .card {
+  padding: 17px;
 }
-
-@media (max-width: 400px) {
-  .size-inputs {
-    gap: 5px;
-  }
-  .input-amount {
-    width: 50px; 
-  }
-  .custom-dropdown {
-    width: 90px;
-  }
 }
