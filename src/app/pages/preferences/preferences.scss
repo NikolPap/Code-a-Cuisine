@@ -1,5 +1,5 @@
 .page-wrapper {
-  padding: 40px 50px;
+  padding: 40px 20px;
   max-width: 1440px;
   margin: 0 auto;
 }
@@ -189,5 +189,28 @@
   &:hover {
     background-color: var(--input-beige) !important;
     
+  }
+}
+
+@media (max-width:900px) {
+  .logo-small {
+    width: 95px;
+  }
+
+  .page-wrapper {
+    padding: 20px;
+  }
+
+  .page-title {
+    text-align:start
+  }
+
+  .counters-section {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .preferences-card {
+    padding: 20px 10px;
   }
 }
