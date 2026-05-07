@@ -3,8 +3,8 @@
     <a routerLink="/" class="logo-link">
       <img src="/assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
     </a>
-    <a (click)="goBack()" class="back-link" style="cursor: pointer;">
-      <img src="/assets/images/arrow-left.svg" alt="back" /> Back
+    <a routerLink="/results" class="back-link">
+      <img src="/assets/images/arrow-left.svg" alt="back" /> Recipe results
     </a>
   </header>
   <div class="recipe-paper" *ngIf="recipe">
@@ -15,7 +15,7 @@
         </div>
         <h1 class="recipe-title">{{ recipe.title }}</h1>
         <div class="cooking-info">
-          <span>Cooking person: {{ recipe.chefsCount }}</span>
+          <span class="cooking-info-span">Cooking person: {{ recipe.chefsCount }}</span>
           <img *ngFor="let i of [].constructor(recipe.chefsCount); let idx = index" 
                [src]="'/assets/images/chef' + (idx + 1) + '.svg'" 
                class="chef-badge" alt="Chef" />
