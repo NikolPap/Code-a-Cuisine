@@ -1,5 +1,5 @@
 .page-wrapper {
-  padding: 40px 50px;
+  padding: 40px 20px;
   max-width: 1440px;
   margin: 0 auto;
   color: var(--text-dark);
@@ -247,4 +247,41 @@
 
 .new-recipe-link:hover {
   background-color: var(--bg-light-green);
+}
+
+@media (max-width:900px) {
+  .logo-small {
+    width: 95px;
+  }
+
+  .page-wrapper {
+    padding: 20px;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+  }
+
+  .page-subtitle {
+    font-size: 1.125rem;
+  }
+
+  .hero-card {
+    flex-direction: column;
+    padding: 20px 10px;
+  }
+
+  .mini-title {
+     font-size: 1.125rem;
+  }
+
+  .cuisine-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width:600px) {
+   .cuisine-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
