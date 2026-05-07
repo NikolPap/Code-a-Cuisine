@@ -21,11 +21,8 @@ export class RecipeResults {
 
  ngOnInit() {
     this.recipes = this.generatorService.getGeneratedRecipes();
-    
-    // === ΔΥΝΑΜΙΚΑ TAGS ===
     const prefs = this.generatorService.getUserPrefs();
     if (prefs) {
-      // Φτιάχνουμε τη λίστα των Tags με την Κουζίνα και τον Χρόνο που επιλέχθηκαν!
       this.tags = [prefs.cuisine, prefs.time];
     }
 
