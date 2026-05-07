@@ -29,14 +29,20 @@
 }
 
 .banner-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 60px;
+  display: block;
+  max-width: 1150px; 
+  width: 100%;
+  margin: 60px auto;
+  text-align: center;
 }
+
 .category-banner {
   width: 100%;
-  max-width: 1150px;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
+
 
 .recipe-list {
   max-width: 1000px;
@@ -173,9 +179,17 @@
     }
   }
 
-  .banner-container {
-    margin-bottom: 40px;
+ .banner-container {
+    max-width: 100%;
+    width: 100%;
+    margin: 30px auto;
   }
+
+  .category-banner {
+    width: 102% !important;
+    height: auto !important;
+  }
+  
 
   .recipe-list {
     gap: 20px;
