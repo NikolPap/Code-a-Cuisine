@@ -125,11 +125,19 @@
   font-weight: 600;
 }
 
+.banner-wrapper {
+  display: block;
+  max-width: 1183px; 
+  width: 100%;
+  margin: 64px auto; 
+  text-align: center;
+}
+
 .section-banner {
   width: 100%;
   height: auto;
-  margin: 40px 0;
   display: block;
+  object-fit: contain; 
 }
 
 .ingredients-split {
@@ -266,6 +274,16 @@
 }
 
 @media (max-width: 900px) {
+  .banner-wrapper {
+    max-width: 100%;
+    margin: 32px auto; 
+  }
+
+  .section-banner {
+    width: 100% !important;
+    height: auto !important;
+  }
+
     .logo-small {
     width: 95px;
   }
@@ -347,7 +365,9 @@
     text-align: center;
     gap: 15px;
   }
-}
+  .new-recipe-link {
+    display: none;
+  }}
 
 @media (max-width:450px) {
 .nutri-grid{
