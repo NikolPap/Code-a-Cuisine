@@ -19,8 +19,16 @@ export class RecipeResults {
   tags: string[] = ['AI Generated', 'New'];
   recipes: any[] = [];
 
-  ngOnInit() {
+ ngOnInit() {
     this.recipes = this.generatorService.getGeneratedRecipes();
+    
+    // === ΔΥΝΑΜΙΚΑ TAGS ===
+    const prefs = this.generatorService.getUserPrefs();
+    if (prefs) {
+      // Φτιάχνουμε τη λίστα των Tags με την Κουζίνα και τον Χρόνο που επιλέχθηκαν!
+      this.tags = [prefs.cuisine, prefs.time];
+    }
+
     if (this.recipes.length === 0) {
       this.router.navigate(['/generate']);
     }
