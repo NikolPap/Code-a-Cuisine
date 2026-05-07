@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Ingredient } from '../shared/interfaces';
 import { Observable } from 'rxjs'
+import { FullRecipe } from '../shared/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -53,14 +54,13 @@ export class Generator {
     return this.http.post(this.n8nWebhookUrl, payload);
   }
 
-    private generatedRecipes: any[] = []; 
+   private generatedRecipes: FullRecipe[] = [];
 
-  setGeneratedRecipes(recipes: any[]) {
-    this.generatedRecipes = recipes;
-  }
+setGeneratedRecipes(recipes: FullRecipe[]): void {
+  this.generatedRecipes = recipes;
+}
 
-  getGeneratedRecipes() {
-    return this.generatedRecipes;
-  }
-
+getGeneratedRecipes(): FullRecipe[] {
+  return this.generatedRecipes;
+}
 }
