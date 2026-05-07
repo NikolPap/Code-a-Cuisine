@@ -1,37 +1,38 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core'; // Πρόσθεσε το OnInit
 import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Generator } from '../../services/generator';
 import { RecipeService } from '../../services/recipe';
-
+import { FullRecipe } from '../../shared/interfaces'; 
 
 @Component({
   selector: 'app-recipe-results',
+  standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './recipe-results.html',
   styleUrl: './recipe-results.scss',
 })
-export class RecipeResults {
+export class RecipeResults implements OnInit { 
   private generatorService = inject(Generator);
   private recipeService = inject(RecipeService);
   private router = inject(Router);
 
   tags: string[] = ['AI Generated', 'New'];
-  recipes: any[] = [];
+  recipes: FullRecipe[] = [];
 
- ngOnInit() {
+  ngOnInit(): void {
     this.recipes = this.generatorService.getGeneratedRecipes();
+    
     const prefs = this.generatorService.getUserPrefs();
     if (prefs) {
       this.tags = [prefs.cuisine, prefs.time];
     }
-
     if (this.recipes.length === 0) {
       this.router.navigate(['/generate']);
     }
   }
 
-  async viewAndSaveRecipe(recipe: any) {
+  async viewAndSaveRecipe(recipe: FullRecipe): Promise<void> {
     const firebaseId = await this.recipeService.saveRecipe(recipe);
     this.router.navigate(['/recipe', firebaseId]);
   }
