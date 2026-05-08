@@ -32,8 +32,13 @@ export class RecipeResults implements OnInit {
     }
   }
 
-  async viewAndSaveRecipe(recipe: FullRecipe): Promise<void> {
+  async viewAndSaveRecipe(recipe: FullRecipe) {
+    if (recipe.id) {
+      this.router.navigate(['/recipe', recipe.id]);
+      return;
+    }
     const firebaseId = await this.recipeService.saveRecipe(recipe);
+    recipe.id = firebaseId;
     this.router.navigate(['/recipe', firebaseId]);
   }
 }
