@@ -25,29 +25,31 @@ export class CookbookCategory implements OnInit {
   private recipeService = inject(RecipeService);
   private cdr = inject(ChangeDetectorRef);
 
+  /** Initializes the component by subscribing to route parameters and fetching filtered recipes from the database. */
   ngOnInit() {
-  this.route.paramMap.subscribe(params => {
-    this.currentCategory = params.get('category') || '';
-    
-    if (this.currentCategory) {
-      this.categoryBanner = `${this.currentCategory}-recipe.svg`;
-      this.recipeService.getAllRecipes().subscribe((allRecipes: FullRecipe[]) => {
-        
-        this.allMatchedRecipes = allRecipes.filter(recipe => {
-          if (!recipe.tags || !Array.isArray(recipe.tags)) return false;
-          return recipe.tags.some((tag: string) => 
-            tag.toLowerCase() === this.currentCategory.toLowerCase()
-          );
+    this.route.paramMap.subscribe(params => {
+      this.currentCategory = params.get('category') || '';
+      
+      if (this.currentCategory) {
+        this.categoryBanner = `${this.currentCategory}-recipe.svg`;
+        this.recipeService.getAllRecipes().subscribe((allRecipes: FullRecipe[]) => {
+          
+          this.allMatchedRecipes = allRecipes.filter(recipe => {
+            if (!recipe.tags || !Array.isArray(recipe.tags)) return false;
+            return recipe.tags.some((tag: string) => 
+              tag.toLowerCase() === this.currentCategory.toLowerCase()
+            );
+          });
+
+          this.totalPages = Math.ceil(this.allMatchedRecipes.length / this.itemsPerPage) || 1;
+          this.pageNumbers = Array.from({length: this.totalPages}, (_, i) => i + 1);
+          this.goToPage(1);
         });
+      }
+    });
+  }
 
-        this.totalPages = Math.ceil(this.allMatchedRecipes.length / this.itemsPerPage) || 1;
-        this.pageNumbers = Array.from({length: this.totalPages}, (_, i) => i + 1);
-        this.goToPage(1);
-      });
-    }
-  });
-}
-
+  /** Updates the visible recipes list based on the selected page and scrolls the window to the top. */
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
