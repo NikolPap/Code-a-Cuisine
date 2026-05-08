@@ -23,6 +23,7 @@ export class RecipeDetail implements OnInit {
   private cdr = inject(ChangeDetectorRef); 
   private location = inject(Location);
 
+  /** Initializes the component by fetching recipe details based on the ID provided in the route parameters. */
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const recipeId = params.get('id');
@@ -36,20 +37,22 @@ export class RecipeDetail implements OnInit {
     });
   }
 
+  /** Navigates back to the previous page using the platform's location history. */
   goBack(event: Event): void {
     event.preventDefault(); 
     this.location.back();
   }
   
- toggleLike(): void {
-  if (!this.recipe) return;
-   this.isLiked = !this.isLiked;
-  let currentLikes = Number(this.recipe.likes);
-  this.recipe.likes = this.isLiked ? currentLikes + 1 : currentLikes - 1;
-  if (this.recipe.id) {
-    this.recipeService.updateLikes(this.recipe.id, this.recipe.likes);
-  } else {
-    console.error("error ");
+  /** Updates the like count locally and synchronizes the change with the database. */
+  toggleLike(): void {
+    if (!this.recipe) return;
+    this.isLiked = !this.isLiked;
+    let currentLikes = Number(this.recipe.likes);
+    this.recipe.likes = this.isLiked ? currentLikes + 1 : currentLikes - 1;
+    if (this.recipe.id) {
+      this.recipeService.updateLikes(this.recipe.id, this.recipe.likes);
+    } else {
+      console.error("error ");
+    }
   }
-}
 }
