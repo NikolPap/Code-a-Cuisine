@@ -20,6 +20,7 @@ export class RecipeResults implements OnInit {
   tags: string[] = ['AI Generated', 'New'];
   recipes: FullRecipe[] = [];
 
+  /** Retrieves generated recipes and user preferences from the service upon component initialization. */
   ngOnInit(): void {
     this.recipes = this.generatorService.getGeneratedRecipes();
     
@@ -32,6 +33,7 @@ export class RecipeResults implements OnInit {
     }
   }
 
+  /** Saves the selected recipe to the database if it hasn't been saved yet and navigates to its detailed view. */
   async viewAndSaveRecipe(recipe: FullRecipe) {
     if (recipe.id) {
       this.router.navigate(['/recipe', recipe.id]);
