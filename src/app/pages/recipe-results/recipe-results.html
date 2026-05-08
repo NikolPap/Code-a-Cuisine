@@ -25,22 +25,16 @@
     </div>
 
     <div class="cards-container">
-        <div class="recipe-card" *ngFor="let recipe of recipes">
-        <div class="card-header">
-            <img src="/assets/images/cloche.svg" alt="recipe" class="card-icon" />
-            <span>Recipe {{ recipe.id }}</span>
-        </div>
-        
-        <h3 class="recipe-title">{{ recipe.title }}</h3>
-        
-        <div class="recipe-time">
-            <img src="/assets/images/clock.svg" alt="time" class="time-icon" />
-            <span>Cooking time: {{ recipe.time }}</span>
-        </div>
-        
-       <button class="btn-view" (click)="viewAndSaveRecipe(recipe)">View</button>
-        </div>
-
+       <div class="recipe-card" *ngFor="let recipe of recipes; let i = index">
+  
+  <div class="card-header">
+    <img src="/assets/images/cloche.svg" alt="recipe" class="card-icon" />
+    <span>Recipe {{ i + 1 }}</span>
+  </div>
+  
+  <h3 class="recipe-title">{{ recipe.title }}</h3>
+  <button class="btn-view" (click)="viewAndSaveRecipe(recipe)">View</button>
+</div>
     </div>
 
     <div class="footer-action">
