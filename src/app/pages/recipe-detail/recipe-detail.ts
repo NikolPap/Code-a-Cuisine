@@ -28,7 +28,6 @@ export class RecipeDetail implements OnInit {
       const recipeId = params.get('id');
       
       if (recipeId) {
-        // 2. ΑΛΛΑΓΗ: Ορίζουμε τον τύπο στο subscribe
         this.recipeService.getRecipeById(recipeId).subscribe((data: FullRecipe) => {
           this.recipe = data; 
           this.cdr.detectChanges();
@@ -37,20 +36,20 @@ export class RecipeDetail implements OnInit {
     });
   }
 
-  goBack(): void {
-    this.location.back(); 
+  goBack(event: Event): void {
+    event.preventDefault(); 
+    this.location.back();
   }
-
-  toggleLike(): void {
-    this.isLiked = !this.isLiked;
-    
-    if (this.recipe) {
-      // Τώρα το VS Code ξέρει ότι το .likes είναι number!
-      this.isLiked ? this.recipe.likes++ : this.recipe.likes--;
-      
-      if (this.recipe.id) {
-        this.recipeService.updateLikes(this.recipe.id, this.recipe.likes);
-      }
-    }
+  
+ toggleLike(): void {
+  if (!this.recipe) return;
+   this.isLiked = !this.isLiked;
+  let currentLikes = Number(this.recipe.likes);
+  this.recipe.likes = this.isLiked ? currentLikes + 1 : currentLikes - 1;
+  if (this.recipe.id) {
+    this.recipeService.updateLikes(this.recipe.id, this.recipe.likes);
+  } else {
+    console.error("error ");
   }
+}
 }
