@@ -1,7 +1,7 @@
 import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http'; // <-- ΝΕΟ IMPORT
+import { HttpErrorResponse } from '@angular/common/http';
 import { LoadingScreen } from '../../components/loading-screen/loading-screen';
 import { Generator } from '../../services/generator';
 import { firstValueFrom } from 'rxjs'; 
@@ -34,21 +34,31 @@ export class Preferences {
     btnLink: ''
   };
 
+  /** Increments or decrements the number of portions within the allowed range (1-12). */
   changePortions(amount: number): void {
     const newValue = this.portions + amount;
     if (newValue >= 1 && newValue <= 12) this.portions = newValue;
   }
 
+  /** Increments or decrements the number of persons cooking within the allowed range (1-3). */
   changePersons(amount: number): void {
     const newValue = this.persons + amount;
     if (newValue >= 1 && newValue <= 3) this.persons = newValue;
   }
 
+  /** Sets the selected cooking time category. */
   selectTime(t: string): void { this.selectedTime = t; }
+
+  /** Sets the selected cuisine style. */
   selectCuisine(c: string): void { this.selectedCuisine = c; }
+
+  /** Sets the selected dietary preference. */
   selectDiet(d: string): void { this.selectedDiet = d; }
+
+  /** Closes the error modal by setting its visibility to false. */
   closeModal(): void { this.modalConfig.show = false; }
 
+  /** Orchestrates the recipe generation process by validating inputs and fetching data from the AI service. */
   async generateRecipe(): Promise<void> {
     if (!this.validatePreferences()) return;
     if (!this.validateIngredientsWeight()) return;
@@ -61,10 +71,12 @@ export class Preferences {
     }
   }
 
+  /** Checks if all mandatory preferences (time, cuisine, diet) have been selected. */
   private validatePreferences(): boolean {
     return !!(this.selectedTime && this.selectedCuisine && this.selectedDiet);
   }
 
+  /** Validates that the user has provided enough ingredients and sufficient quantities for the selected portions. */
   private validateIngredientsWeight(): boolean {
     const ingredients: Ingredient[] = this.generatorService.getIngredients();
     if (ingredients.length < 2) {
@@ -80,6 +92,7 @@ export class Preferences {
     return true;
   }
 
+  /** Handles the asynchronous API call to n8n and ensures the loading animation plays for a minimum duration. */
   private async fetchFromAI(): Promise<void> {
     const userPrefs: UserPreferences = {
       portions: this.portions, persons: this.persons,
@@ -101,6 +114,7 @@ export class Preferences {
     }
   }
 
+  /** Manages errors from the AI generation process and displays appropriate messages in the modal. */
   private handleAIError(err: HttpErrorResponse): void {
     this.isLoading = false; 
     const isQuota = err.status === 429 || err.error?.message?.includes('Limit');
@@ -115,6 +129,7 @@ export class Preferences {
     this.cdr.detectChanges();
   }
 
+  /** Configures and displays the modal for cases where input ingredients are insufficient. */
   private showIngredientError(): void {
     this.modalConfig = {
       show: true,
