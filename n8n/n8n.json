@@ -1,0 +1,242 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-recipe",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -1600,
+        368
+      ],
+      "webhookId": ""
+    },
+    {
+      "parameters": {
+        "jsCode": "const ip = $input.item.json?.headers?.['x-forwarded-for'] || $input.item.headers?.['x-forwarded-for'] || 'localhost';\nconst today = new Date().toISOString().split('T')[0];\nconst staticData = $getWorkflowStaticData('global');\nstaticData.quota = staticData.quota || {};\nstaticData.quota[today] = staticData.quota[today] || { globalLimit: 0, ips: {} };\nlet ipData = staticData.quota[today].ips[ip] || 0;\nlet isAllowed = true;\nlet reason = \"\";\n\n\nlet incomingData = $input.item.json.body?.data || $input.item.json.data || $input.item.json;\nreturn { isAllowed, reason, data: incomingData };"
+      },
+      "id": "",
+      "name": "Rate Limiter",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -1104,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.isAllowed }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -816,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"error\": true, \"message\": $json.reason } }}",
+        "options": {
+          "responseCode": 429,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "",
+      "name": "Respond Error",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const prefs = $input.item.json.data.preferences || {};\nconst ingredients = JSON.stringify($input.item.json.data.ingredients || []);\n\nconst prompt = `Create exactly 3 recipes. \nCuisine: ${prefs.cuisineStyle}\nDiet: ${prefs.dietType}\nPortions: ${prefs.portions}\nUse ingredients: ${ingredients}. \n\nRULES:\n1. Use at least 70% of the ingredients provided.\n2. You can add a MAXIMUM of 3 extra basic ingredients.\n3. Split the cooking instructions clearly between ${prefs.personsCooking || 1} chef(s).\n4. Make the cooking instructions (text in steps) VERY DETAILED, descriptive, and at least 2-3 sentences long per step. Explain exactly HOW to cook it.\n\nOutput exactly this JSON structure: \n[ { \"title\": \"Name\", \"time\": \"20min\", \"portions\": ${prefs.portions}, \"chefsCount\": ${prefs.personsCooking || 1}, \"likes\": 0, \"tags\": [\"Tag1\"], \"nutrition\": { \"energy\": \"500 kcal\", \"protein\": \"20g\", \"fat\": \"15g\", \"carbs\": \"40g\" }, \"myIngredients\": [ { \"amount\": \"100g\", \"name\": \"Pasta\" } ], \"extraIngredients\": [ { \"amount\": \"1 tbsp\", \"name\": \"Oil\" } ], \"steps\": [ { \"num\": 1, \"title\": \"Detailed Step Title\", \"chefId\": 1, \"text\": \"Detailed multi-sentence instruction goes here...\" } ] } ]`;\n\nconst groqBody = {\n  model: \"llama-3.3-70b-versatile\",\n  temperature: 0.7,\n  messages: [\n    {\n      role: \"system\",\n      content: \"You are a professional Michelin-star chef. Reply ONLY with a raw JSON array of exactly 3 recipes. NO MARKDOWN, no conversational text.\"\n    },\n    {\n      role: \"user\",\n      content: prompt\n    }\n  ]\n};\n\nreturn { groqBody: groqBody };"
+      },
+      "id": "",
+      "name": "Prepare Groq Body",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ..."
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.groqBody }}",
+        "options": {}
+      },
+      "id": "",
+      "name": "Free AI (Groq)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -176,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "let rawContent = $input.item.json.choices[0].message.content;\n\n\nrawContent = rawContent.replace(/```json/g, '').replace(/```/g, '').trim();\n\nlet recipesList = JSON.parse(rawContent);\n\nreturn {\n  success: true,\n  recipes: recipesList\n};"
+      },
+      "id": "",
+      "name": "Parse Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        32,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        224,
+        160
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Rate Limiter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rate Limiter": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Prepare Groq Body",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Groq Body": {
+      "main": [
+        [
+          {
+            "node": "Free AI (Groq)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Free AI (Groq)": {
+      "main": [
+        [
+          {
+            "node": "Parse Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Response": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": ""
+  }
+}
