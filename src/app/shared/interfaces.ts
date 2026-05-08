@@ -7,7 +7,7 @@ export interface Ingredient {
 }
 
 export interface RecipeSummary {
-  id: number;
+  id: string;
   title: string;
   time: string;
 }
@@ -26,7 +26,7 @@ export interface Cuisine {
 }
 
 export interface RecipeListItem {
-  id: number;
+  id: string;
   title: string;
   time: string;
   tags: string[];
@@ -50,7 +50,7 @@ export interface ModalConfig {
 }
 
 export interface FullRecipe {
-  id?: string;
+  id: string;
   title: string;
   time: string;
   portions: number;
