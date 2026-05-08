@@ -31,6 +31,7 @@ export class Cookbook implements OnInit {
   startX: number = 0;
   scrollLeft: number = 0;
 
+  /** Fetches all recipes from the database and displays the top 10 most liked ones. */
   ngOnInit() {
     this.recipeService.getAllRecipes().subscribe((recipes: RecipeListItem[]) => {
       const sortedRecipes = recipes.sort((a, b) => b.likes - a.likes);
@@ -40,15 +41,20 @@ export class Cookbook implements OnInit {
     });
   }
 
+  /** Initializes the drag-to-scroll functionality when the mouse button is pressed. */
   onMouseDown(e: MouseEvent) {
     this.isDown = true;
     this.startX = e.pageX - this.scrollContainer.nativeElement.offsetLeft;
     this.scrollLeft = this.scrollContainer.nativeElement.scrollLeft;
   }
 
+  /** Deactivates the drag-to-scroll state when the mouse button is released. */
   onMouseUp() { this.isDown = false; }
+
+  /** Deactivates the drag-to-scroll state when the mouse leaves the container area. */
   onMouseLeave() { this.isDown = false; }
 
+  /** Calculates and applies the horizontal scroll position based on mouse movement during a drag. */
   onMouseMove(e: MouseEvent) {
     if (!this.isDown) return; 
     e.preventDefault(); 
