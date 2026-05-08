@@ -1,12 +1,13 @@
 <div class="page-wrapper">
-  <header class="top-header">
-    <a routerLink="/" class="logo-link">
-      <img src="/assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
-    </a>
-    <a routerLink="/results" class="back-link">
-      <img src="/assets/images/arrow-left.svg" alt="back" /> Recipe results
-    </a>
-  </header>
+ <header class="top-header">
+  <a routerLink="/" class="logo-link">
+    <img src="/assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
+  </a>
+  <a (click)="goBack($event)" class="back-link" style="cursor: pointer;">
+    <img src="/assets/images/arrow-left.svg" alt="back" /> 
+    Back
+  </a>
+</header>
   <div class="recipe-paper" *ngIf="recipe">
     <div class="recipe-header">
       <div class="header-left">
