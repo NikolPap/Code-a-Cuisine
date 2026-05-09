@@ -2,10 +2,10 @@
   <header class="top-header">
     <div class="header-left">
       <a routerLink="/" class="logo-link">
-        <img src="/assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
+        <img src="assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
       </a>
       <a routerLink="/generate" class="back-link">
-        <img src="/assets/images/arrow-left.svg" alt="back" /> Ingredients
+        <img src="assets/images/arrow-left.svg" alt="back" /> Ingredients
       </a>
     </div>
   </header>
@@ -18,27 +18,27 @@
     <div class="counter-block">
       <p>How many portions you need?</p>
       <div class="counter-controls">
-        <button class="icon-btn" (click)="changePortions(-1)"><img src="/assets/images/minus-box.svg" alt="-" /></button>
+        <button class="icon-btn" (click)="changePortions(-1)"><img src="assets/images/minus-box.svg" alt="-" /></button>
         <span class="counter-value">{{ portions }}</span>
         <span class="counter-label">Portions</span>
-        <button class="icon-btn" (click)="changePortions(1)"><img src="/assets/images/plus-box.svg" alt="+" /></button>
+        <button class="icon-btn" (click)="changePortions(1)"><img src="assets/images/plus-box.svg" alt="+" /></button>
       </div>
     </div>
 
     <div class="counter-block">
       <p>How many are cooking?</p>
       <div class="counter-controls">
-        <button class="icon-btn" (click)="changePersons(-1)"><img src="/assets/images/minus-box.svg" alt="-" /></button>
+        <button class="icon-btn" (click)="changePersons(-1)"><img src="assets/images/minus-box.svg" alt="-" /></button>
         <span class="counter-value">{{ persons }}</span>
         <span class="counter-label">{{ persons === 1 ? 'Person' : 'Persons' }}</span>
-        <button class="icon-btn" (click)="changePersons(1)"><img src="/assets/images/plus-box.svg" alt="+" /></button>
+        <button class="icon-btn" (click)="changePersons(1)"><img src="assets/images/plus-box.svg" alt="+" /></button>
       </div>
     </div>
   </div>
 
   <div class="card preferences-card">
     <div class="pref-group">
-      <h3><img src="/assets/images/clock.svg" alt="time" class="section-icon"/> Cooking time:</h3>
+      <h3><img src="assets/images/clock.svg" alt="time" class="section-icon"/> Cooking time:</h3>
       <div class="pills-container">
         <div class="pill-wrapper" (click)="selectTime('Quick')">
           <div class="pill" [class.active]="selectedTime === 'Quick'">Quick</div>
@@ -56,7 +56,7 @@
     </div>
 
     <div class="pref-group">
-      <h3><img src="/assets/images/public.svg" alt="cuisine" class="section-icon"/> Cuisine</h3>
+      <h3><img src="assets/images/public.svg" alt="cuisine" class="section-icon"/> Cuisine</h3>
       <div class="pills-container">
         <div class="pill" [class.active]="selectedCuisine === 'German'" (click)="selectCuisine('German')">German</div>
         <div class="pill" [class.active]="selectedCuisine === 'Italian'" (click)="selectCuisine('Italian')">Italian</div>
@@ -68,7 +68,7 @@
     </div>
 
     <div class="pref-group">
-      <h3><img src="/assets/images/fork-spoon.svg" alt="diet" class="section-icon"/> Diet preferences</h3>
+      <h3><img src="assets/images/fork-spoon.svg" alt="diet" class="section-icon"/> Diet preferences</h3>
       <div class="pills-container">
         <div class="pill" [class.active]="selectedDiet === 'Vegetarian'" (click)="selectDiet('Vegetarian')">Vegetarian</div>
         <div class="pill" [class.active]="selectedDiet === 'Vegan'" (click)="selectDiet('Vegan')">Vegan</div>
