@@ -6,6 +6,7 @@ import { LoadingScreen } from '../../components/loading-screen/loading-screen';
 import { Generator } from '../../services/generator';
 import { firstValueFrom } from 'rxjs'; 
 import { UserPreferences, ModalConfig, Ingredient } from '../../shared/interfaces';
+import { RecipeService } from '../../services/recipe';
 
 @Component({
   selector: 'app-preferences',
@@ -25,6 +26,8 @@ export class Preferences {
   private router = inject(Router);
   private generatorService = inject(Generator);
   private cdr = inject(ChangeDetectorRef); 
+   private recipeService = inject(RecipeService); 
+
 
   modalConfig: ModalConfig = {
     show: false,
@@ -104,7 +107,12 @@ export class Preferences {
       new Promise(res => setTimeout(res, 9000))
     ]);
     
-    if (response?.recipes?.length > 0) {
+  if (response?.recipes?.length > 0)  {
+      for (let recipe of response.recipes) {
+        const firebaseId = await this.recipeService.saveRecipe(recipe);
+        recipe.id = firebaseId;
+      }
+
       this.generatorService.setUserPrefs(userPrefs);
       this.generatorService.setGeneratedRecipes(response.recipes);
       this.isLoading = false; 
