@@ -1,10 +1,10 @@
 <div class="page-wrapper">
   <header class="top-header">
     <a routerLink="/">
-      <img src="/assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
+      <img src="assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
     </a>
     <a routerLink="/" class="back-link">
-      <img src="/assets/images/arrow-left.svg" alt="back" /> Back
+      <img src="assets/images/arrow-left.svg" alt="back" /> Back
     </a>
   </header>
   <div class="hero-card">
@@ -17,7 +17,7 @@
     </div>
     <div class="most-liked-section">
       <h3 class="section-title">
-        Most liked recipes <img src="/assets/images/favorite.svg" alt="heart" class="heart-icon"/>
+        Most liked recipes <img src="assets/images/favorite.svg" alt="heart" class="heart-icon"/>
       </h3>
       
       <div class="liked-recipes-container"
@@ -29,10 +29,10 @@
           <div class="mini-recipe-card" *ngFor="let recipe of mostLikedRecipes" [routerLink]="['/recipe', recipe.id]" style="cursor: pointer;">
           <div class="mini-header">
             <span class="mini-time">
-              <img src="/assets/images/clock.svg" alt="time" /> Cooking time: {{ recipe.time }}
+              <img src="assets/images/clock.svg" alt="time" /> Cooking time: {{ recipe.time }}
             </span>
             <span class="mini-likes">
-              <img src="/assets/images/favorite-small.svg" alt="likes" /> {{ recipe.likes }}
+              <img src="assets/images/favorite-small.svg" alt="likes" /> {{ recipe.likes }}
             </span>
           </div>
           <h4 class="mini-title">{{ recipe.title }}</h4>
@@ -55,7 +55,7 @@
   <div class="footer-action">
    <a routerLink="/generate" class="new-recipe-link">
         Generate new recipe 
-        <img class="arrow-icon" src="/assets/images/arrow-righ-greent.svg" alt="right arrow icon">
+        <img class="arrow-icon" src="assets/images/arrow-righ-greent.svg" alt="right arrow icon">
         </a>
   </div>
 </div>
