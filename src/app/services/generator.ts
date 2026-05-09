@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Ingredient, FullRecipe, UserPreferences } from '../shared/interfaces';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Generator {
   private http = inject(HttpClient);
-  private n8nWebhookUrl = 'http://localhost:5678/webhook/generate-recipe';
+  private n8nWebhookUrl = `${environment.n8nUrl}/webhook/generate-recipe`;
   private userIngredients: Ingredient[] = [];
   private generatedRecipes: FullRecipe[] = [];
   private userPrefs: UserPreferences | null = null; 
