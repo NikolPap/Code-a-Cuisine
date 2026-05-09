@@ -3,10 +3,10 @@
   <header class="top-header">
     <div class="header-left">
       <a routerLink="/" class="logo-link">
-        <img src="/assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
+        <img src="assets/images/logo.svg" alt="Code à Cuisine" class="logo-small" />
       </a>
       <a routerLink="/cookbook" class="back-link">
-        <img src="/assets/images/arrow-left.svg" alt="back" /> Cookbook
+        <img src="assets/images/arrow-left.svg" alt="back" /> Cookbook
       </a>
     </div>
     
@@ -17,11 +17,11 @@
   <picture>
     <source 
       media="(max-width: 900px)" 
-      [srcset]="'/assets/images/' + currentCategory + '-mobile.svg'">
+      [srcset]="'assets/images/' + currentCategory + '-mobile.svg'">
     
   
     <img 
-      [src]="'/assets/images/' + categoryBanner" 
+      [src]="'assets/images/' + categoryBanner" 
       alt="Category Banner" 
       class="category-banner" />
   </picture>
@@ -35,7 +35,7 @@
         
         <div class="row-info">
           <div class="time-info">
-            <img src="/assets/images/clock.svg" alt="clock" /> Cooking time: {{ item.time }}
+            <img src="assets/images/clock.svg" alt="clock" /> Cooking time: {{ item.time }}
           </div>
           <h3 class="recipe-title" [routerLink]="['/recipe', item.id]">{{ item.title }}</h3>
         </div>
@@ -44,7 +44,7 @@
       <div class="row-right">
         <span class="tag" *ngFor="let tag of item.tags">{{ tag }}</span>
         <span class="tag like-tag">
-          <img src="/assets/images/favorite-small.svg" alt="likes"/> {{ item.likes }}
+          <img src="assets/images/favorite-small.svg" alt="likes"/> {{ item.likes }}
         </span>
       </div>
 
