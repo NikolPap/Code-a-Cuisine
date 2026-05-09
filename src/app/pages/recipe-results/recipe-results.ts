@@ -34,13 +34,7 @@ export class RecipeResults implements OnInit {
   }
 
   /** Saves the selected recipe to the database if it hasn't been saved yet and navigates to its detailed view. */
-  async viewAndSaveRecipe(recipe: FullRecipe) {
-    if (recipe.id) {
-      this.router.navigate(['/recipe', recipe.id]);
-      return;
-    }
-    const firebaseId = await this.recipeService.saveRecipe(recipe);
-    recipe.id = firebaseId;
-    this.router.navigate(['/recipe', firebaseId]);
-  }
+ async viewAndSaveRecipe(recipe: FullRecipe) {
+  this.router.navigate(['/recipe', recipe.id]);
+}
 }
